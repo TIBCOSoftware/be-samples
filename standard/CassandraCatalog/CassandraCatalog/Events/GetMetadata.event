@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="GetMetadata" description="" GUID="66EDF4E5-0438-158D-9E18-45C31A0C7CBC" ownerProjectName="CassandraCatalog" superEventPath="" ttlUnits="Seconds">
+    <expiryAction folder="/Events/GetMetadata" name="GetMetadata_expiryAction" ownerProjectName="CassandraCatalog" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="getmetadata" type="/Events/GetMetadata"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,16 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.ShutDown {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		System.debugOut("Shutdown and cleanup store connections.");
+	
+		Store.disconnect(GlobalProperties.STORE_URL);
+	}
+}

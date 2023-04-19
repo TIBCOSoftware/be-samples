@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="PutEmployee" description="" GUID="4039E65E-E7EA-187A-C99A-C3CFAF3FEBC6" ownerProjectName="CassandraCatalog" superEventPath="" ttlUnits="Seconds">
+    <properties name="age" ownerProjectName="CassandraCatalog" type="int" ownerPath="/Events/PutEmployee"/>
+    <properties name="isPermanant" ownerProjectName="CassandraCatalog" type="boolean" ownerPath="/Events/PutEmployee"/>
+    <properties name="salary" ownerProjectName="CassandraCatalog" type="double" ownerPath="/Events/PutEmployee"/>
+    <properties name="name" ownerProjectName="CassandraCatalog" ownerPath="/Events/PutEmployee"/>
+    <properties name="homePhone" ownerProjectName="CassandraCatalog" ownerPath="/Events/PutEmployee"/>
+    <properties name="mobilePhone" ownerProjectName="CassandraCatalog" ownerPath="/Events/PutEmployee"/>
+    <properties name="address" ownerProjectName="CassandraCatalog" ownerPath="/Events/PutEmployee"/>
+    <properties name="alternateAddress" ownerProjectName="CassandraCatalog" ownerPath="/Events/PutEmployee"/>
+    <properties name="departments" ownerProjectName="CassandraCatalog" ownerPath="/Events/PutEmployee"/>
+    <expiryAction folder="/Events/PutEmployee" name="PutEmployee_expiryAction" ownerProjectName="CassandraCatalog" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="putemployee" type="/Events/PutEmployee"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

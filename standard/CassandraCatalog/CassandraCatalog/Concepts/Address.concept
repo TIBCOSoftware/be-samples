@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Concepts/" name="Address" description="" GUID="C850E94E-4D1E-A8AD-5CBA-876BCD2053D8" ownerProjectName="CassandraCatalog" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="address" ownerProjectName="CassandraCatalog"/>
+    <properties name="addressId" ownerProjectName="CassandraCatalog" type="long"/>
+</element:Concept>
