@@ -93,14 +93,14 @@ key:[{"a":"TestA"}], properties:[], content:{a=NULL, b=NULL, c=NULL}
 #### Additional points to consider:
 At this point, we will focus on ingest i.e. events flowing from Cassandra into BE.
 Limitations:
-Does not replay logged batches
-Does not manage table truncates
-Does not manage TTLs
-Does not support range deletes
-Does not sync data available before starting the CDC agent.
-CQL column names must not match a Pulsar primitive type name (ex: INT32)
+- Does not replay logged batches
+- Does not manage table truncates
+- Does not manage TTLs
+- Does not support range deletes
+- Does not sync data available before starting the CDC agent.
+- CQL column names must not match a Pulsar primitive type name (ex: INT32)
 
 ### References:
-https://github.com/datastax/cdc-apache-cassandra
-https://medium.com/building-the-open-data-stack/combine-data-at-rest-and-data-in-motion-with-cdc-for-apache-cassandra-f4e1cdf08901
+- https://github.com/datastax/cdc-apache-cassandra
+- https://medium.com/building-the-open-data-stack/combine-data-at-rest-and-data-in-motion-with-cdc-for-apache-cassandra-f4e1cdf08901
  
