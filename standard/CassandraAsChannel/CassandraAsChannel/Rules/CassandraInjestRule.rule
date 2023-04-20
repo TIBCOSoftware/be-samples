@@ -1,0 +1,22 @@
+/**
+ * @description Processes the orders.
+ * @author
+ */
+rule Rules.CassandraInjestRule {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.CassandraInjest cassandraInjestEvent;
+	}
+	when {
+		
+	}
+	then {
+		
+		System.debugOut("#### Received Injest Event from Cassandra, A: " + cassandraInjestEvent.a + " B: $" + cassandraInjestEvent.b + " C:" + cassandraInjestEvent.c);
+//		Events.CassandraInjest cass= Events.CassandraInjest.CassandraInjest("xyz",null,1,"demo","test");
+//		Event.sendEvent(cass);
+	}
+}
