@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration:StudioProjectConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http:///com/tibco/cep/studio/common/configuration/model/project_configuration.ecore" name="CassandraCatalog" version="6.3.0" build="056" xpathVersion="2.0">
-  <thirdpartyLibEntries entryType="Third Party" path="/home/rakulkar/C/myhome/git-fork-new/be-contribution/catalog/cassandra-catalog-fn/target/cassandra-catalog-fn-1.0.0.jar" timestamp="1679571893566">
-    <nativeLibraryLocation/>
-  </thirdpartyLibEntries>
-  <enterpriseArchiveConfiguration name="CassandraCatalog" author="TIBCO Software Inc." version="48" path="/home/rakulkar/C/workspaces/studioapp60/CassandraCatalog/Deployments/CassandraCatalog.ear" overwrite="true"/>
-  <bpmnProcessSettings/>
-</configuration:StudioProjectConfiguration>
