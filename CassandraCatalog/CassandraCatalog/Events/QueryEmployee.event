@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="QueryEmployee" description="" GUID="497487A9-D3A7-C44C-7CF7-6FA27389DE09" ownerProjectName="CassandraCatalog" ttlUnits="Seconds">
+    <properties name="age" ownerProjectName="CassandraCatalog" type="int" ownerPath="/Events/QueryEmployee"/>
+    <expiryAction folder="/Events/QueryEmployee" name="QueryEmployee_expiryAction" ownerProjectName="CassandraCatalog" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="queryemployee" type="/Events/QueryEmployee"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

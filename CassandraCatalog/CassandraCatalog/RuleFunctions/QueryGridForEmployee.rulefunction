@@ -1,0 +1,40 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.QueryGridForEmployee {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.QueryEmployee queryEmployee;
+	}
+	body {
+		String containerName = "Employee";
+		
+		Store.open(GlobalProperties.STORE_URL, containerName);
+		
+		String query = "select * from " + containerName + " where age > ?";
+		Object[] queryParams = {queryEmployee.age};
+		Object queryIterator = Store.query(GlobalProperties.STORE_URL, query, queryParams, null, "/Concepts/Employee");
+		
+		int cnt = 0;
+		Object stringBuff = String.createBuffer(10);
+		
+		while (Collections.Iterator.hasNext(queryIterator)) {
+			Employee queryEmp = Collections.Iterator.next(queryIterator);
+			String.append(stringBuff,"-------------\n");
+			String.append(stringBuff, GetEmployeeContent(queryEmp));
+			cnt++;
+		}
+		
+		if (cnt > 0) {
+			System.debugOut("Query Employee Concepts[" + query + "], List("+ cnt +") .... \n" + String.convertBufferToString(stringBuff));
+		} else {
+			System.debugOut("No Employees found matching the query[" + query + "]...");
+		}
+		
+		String.clearBuffer(stringBuff);
+		
+		Event.replyEvent(queryEmployee, queryEmployee);
+	}
+}

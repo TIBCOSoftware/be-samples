@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.CassandraInjestStartup {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+			System.debugOut("#### In Cassandra Injest Startup...  ");
+	}
+}

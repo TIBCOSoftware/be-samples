@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" folder="/Channels/" name="CassandraAsChannel" description="" GUID="33B6457C-A23E-D671-E4BA-2159D03E5842" ownerProjectName="CassandraAsChannel">
+  <driver label="PULSAR" channel="/">
+    <properties>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.url" value="pulsar://localhost:6650" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.namespace" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.connection.timeout.milli" value="10000" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.security.protocol" value="PLAINTEXT" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.tls.store.type" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.ca.cert.file" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.tls.client.identity.resource" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.tls.pkcs.or.truststore.resource" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.authentication.key" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.authentication.config.file" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.http.basic.authentication.identity.resource" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.oauth.authentication.issuer.url" value="" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="pulsar.oauth.authentication.audience.url" value="" mandatory="true"/>
+    </properties>
+    <destinations name="cassandraInjest" description="" GUID="3A70CD14-9B8D-11D9-3B53-723DFABEE2A4" ownerProjectName="CassandraAsChannel" eventURI="/Events/CassandraInjest" serializerDeserializerClass="com.tibco.cep.driver.pulsar.serializer.PulsarJsonSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value="" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.topic.name" value="data-ks1.foo" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.client.id" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.initial.position" value="Earliest"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.subscription.type" value="Shared"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.cassandra.source" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.sync.sender" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.compression.type" value="NONE"/>
+        <properties xsi:type="designtime:SimpleProperty" name="pulsar.destination.message.key.rf" value=""/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="Pulsar"/>
+  </driver>
+</channel:Channel>

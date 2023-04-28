@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     Cassandra Store Catalog Functions Example
+
+- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../_resources/examples.css";</style>
+<script type="text/javascript" src="../_resources/examples.js" /></script>
+
+<script type="text/javascript">
+
+function buildForms() {
+ var form;
+
+
+ SendEventForm.setServer("http://localhost:4545");
+
+
+ // Metadata
+ form = SendEventForm.get("showMetadata");
+ form.setDestinationPath("/Channels/HTTPChannel/metadata");
+ form.setEventPath("/Events/GetMetadata");
+ form.build();
+
+ // Put Employee
+ form = SendEventForm.get("putEmployee");
+ form.setDestinationPath("/Channels/HTTPChannel/put");
+ form.setEventPath("/Events/PutEmployee");
+ form.addProperty("name", "Bob");
+ form.addProperty("age", "25");
+ form.addProperty("isPermanant", "true");
+ form.addProperty("salary", "500.00");
+ form.addProperty("homePhone", "212-313-4114");
+ form.addProperty("mobilePhone", "400-300-4000");
+ form.addProperty("address", "Palo Alto, California");
+ form.addProperty("alternateAddress", "Mountain View, California");
+ form.addProperty("departments", "Sales, HR");
+ form.build();
+
+ // Get Employee
+ form = SendEventForm.get("getEmployee");
+ form.setDestinationPath("/Channels/HTTPChannel/get");
+ form.setEventPath("/Events/GetEmployee");
+ form.addProperty("empId", "679241819293221");
+ form.addProperty("addressId", "679241818009414,679241818947365");
+ form.addProperty("phoneId", "679241819072128");
+ form.build();
+
+ // Delete Employee
+ form = SendEventForm.get("deleteEmployee");
+ form.setDestinationPath("/Channels/HTTPChannel/delete");
+ form.setEventPath("/Events/DeleteEmployee");
+ form.addProperty("empId", "679241819293221");
+ form.addProperty("addressId", "679241818009414,679241818947365");
+ form.addProperty("phoneId", "679241819072128");
+ form.build();
+
+ // Query Employees
+ form = SendEventForm.get("queryEmployees");
+ form.setDestinationPath("/Channels/HTTPChannel/query");
+ form.setEventPath("/Events/QueryEmployee");
+ form.addProperty("age", "20");
+ form.build();
+
+ // Query Employees
+ form = SendEventForm.get("queryEmployees");
+ form.setDestinationPath("/Channels/HTTPChannel/query");
+ form.setEventPath("/Events/QueryEmployee");
+ form.addProperty("age", "20");
+ form.build();
+
+// Phone Transaction
+ form = SendEventForm.get("phoneTransaction");
+ form.setDestinationPath("/Channels/HTTPChannel/phoneTransaction");
+ form.setEventPath("/Events/PerformPhoneTransaction");
+ form.build();
+
+}
+</script>
+</head>
+<body onLoad="buildForms()">
+
+
+<h1>Cassandra Store Catalog Functions Example</h1>
+
+
+<h2>Purpose of This Example</h2>
+
+<p>This example demonstrates the use of various Store Catalog functions APIs to provide communication with the Cassandra store.</p> Below is the list of features this example covers,
+<ul>
+<li><p>Fetching metadata of the configured store</p></li>
+<li><p>Put/Get/Delete/Query operations on Entities(Concept/Events) against the store </p></li>
+<li><p>Manual creation of items and performing Put/Get/Delete/Query on them against the store </p></li>
+<li><p>Running store operations within a transaction </p></li>
+</ul>
+<p><b>Note:</b> The application uses Store APIs and can be used with external <b> Apache Cassandra</b>. 
+
+<h2>Pre-requisites</h2>
+
+<p>Below are the list of pre-requisites before running this example:</p>
+<ul>
+<li><p>Install Apache Cassandra server (Apache Cassandra 4.x and above) - (To run this example with Apache Cassandra)</p></li>  
+</ul>
+
+<h2>How to Run the Example</h2>
+<ol>
+
+<li>
+<p>Update be-engine.tra and studio.tra(BE_HOME/studio/eclipse/configuration/studio.tra).
+    
+<p><b>Setup Apache Cassandra store (To run this example with Apache Cassandra).</b></p>
+
+An implementation of Cassandra Store Catalog functions is available at https://github.com/TIBCOSoftware/be-contribution/tree/main/catalog/cassandra-catalog-fn.
+<p>User can build the project as mentioned https://github.com/TIBCOSoftware/be-contribution/tree/main/catalog/README.md (using maven goal install).
+<p>cassandra-catalog-fn-X.X.X.jar : Jar file build as mentioned in previous step is available inside target directory. This jar includes the implemantation classes. 
+<p>Start BusinessEvents Studio and open your project.
+<p>Add cassandra-catalog-fn-X.X.X.jar to your Build Path - with this step user will be able to see newly added catalog functions inside Catalog Functions->Custom Functions view in studio.
+    
+<pre class="commands">
+<b>Change the directory to  <i>be-samples-dir</i>/standard/CassandraCatalog/scripts</b>
+
+<b>Start the Apache Cassandra store as follows</b>
+Make sure your Apache Cassandra server is running.
+Create a keyspace named 'storefunctions' with user credentials be_user/BE_USER.
+Execute storefunctions.cql script for this keyspace using command : $CASSANDRA_HOME/bin/cqlsh -k storefunctions -f ./storefunctions.cql
+</pre>
+
+<p>Start the TIBCO BusinessEvents engine using the following command. </p>
+
+<pre class="commands">
+
+cd <i>be-samples-dir</i>/CassandraCatalog
+<i>BE_HOME</i>/bin/be-engine --propFile <i>BE_HOME</i>/bin/be-engine.tra -u default -c CassandraCatalog/Deployments/Cassandra.cdd CassandraCatalog.ear
+
+</pre>
+
+<p>Adapt the command as needed, for example, if you have customized the example project, or are running it from a different directory.</p>
+</li>
+
+<li>
+<p>Show store metadata</p>
+
+<form id="showMetadata"></form>
+
+<p>In the command window you see a message like this:<br/>
+<br/><image src="images/1.png"/>
+</p>
+</li>
+
+<li>
+<p>Create Employee and provide it with the necessary details in the form below. All the dependent/contained entities will be created and added as well</p>
+
+<form id="putEmployee"></form>
+
+<p>In the command window you see a message like this:<br/>
+<br/><image src="images/2.png"/>
+</p>
+</li>
+
+<li>
+<p>Get Employee Details. Use the EmpId created from earlier Employee creations. Conditionally if associated Address and Phone entities details need to be retrieved, then provide corresponding entity id's as well. Those again should be available from previous Employee creation.</p>
+
+<form id="getEmployee"></form>
+
+<p>Passing only empId retrieves only employee details:<br/>
+<br/><image src="images/3.png"/>
+</p>
+
+<p>However passing addressId's and PhoneId along with empId retrieves employee plus contained address/phone entity details:<br/>
+<br/><image src="images/4.png"/>
+</p>
+</li>
+
+<li>
+<p>Query Employee Details based on a predefined filter age > ?</p>
+
+<form id="queryEmployees"></form>
+
+<p>In the command window you see a message like this:<br/>
+<br/><image src="images/5.png"/>
+</p>
+</li>
+
+<li>
+<p>Delete Employee. Use the EmpId created from earlier Employee creations. Conditionally if associated Address and Phone entities need to be deleted, then provide corresponding entity id's as well. Those again should be available from previous Employee creation.</p>
+
+<form id="deleteEmployee"></form>
+
+<p>In the command window you see a message like this:<br/>
+<span class="logs"><br/>Deleted Employee/Address/Phone Concept/s with EmpId[679241819293221], AddressIds[679241818009414,679241818947365] & Phone[679241819072128]</span></p>
+</li>
+
+<li>
+
+<p>Clicking on the below button will perform the following operations within a transaction on Phone container (Table in Cassandra),</p>
+<ul>
+	<li>Enable Transactions</li>
+	<li>Put 2 phone items</li>
+	<li>Get details of one phone items</li>
+	<li>Delete one from it</li>
+	<li>Query Phones - Nothing from #1 and #2 should be visible</li>
+	<li>Commit</li>
+	<li>Query Phones again - Should show #1 + #2 (only 1 of 2 phone item added should show up)</li>
+</ul>
+
+<form id="phoneTransaction"></form>
+<p>In the command window you see a message like this:<br/>
+<br/><image src="images/6.png"/>
+</p>
+
+</ol>
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023. Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

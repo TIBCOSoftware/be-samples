@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Scorecard xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/" name="GlobalProperties" description="" GUID="068AE795-9922-AF52-5510-D11CB9315AF6" ownerProjectName="CassandraCatalog" scorecard="true">
+    <properties name="STORE_URL" ownerProjectName="CassandraCatalog"/>
+    <properties name="STORE_TYPE" ownerProjectName="CassandraCatalog"/>
+</element:Scorecard>

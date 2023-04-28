@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="CassandraInjest" description="" GUID="2A72A669-6574-C8A7-92A0-2802F63D2138" ownerProjectName="CassandraAsChannel" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/CassandraAsChannel" destinationName="cassandraInjest">
+  <properties name="a" ownerProjectName="CassandraAsChannel" type="int"/>
+  <properties name="b" ownerProjectName="CassandraAsChannel"/>
+  <properties name="c" ownerProjectName="CassandraAsChannel"/>
+  <expiryAction name="CassandraInjest_expiryAction" ownerProjectName="CassandraAsChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="cassandrainjest" type="/Events/CassandraInjest"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Concepts/" name="Phone" description="" GUID="ACF29AA1-A828-310D-FCA5-7D30FB6345A8" ownerProjectName="CassandraCatalog" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="home" ownerProjectName="CassandraCatalog"/>
+    <properties name="mobile" ownerProjectName="CassandraCatalog"/>
+    <properties name="phoneId" ownerProjectName="CassandraCatalog" type="long"/>
+</element:Concept>
