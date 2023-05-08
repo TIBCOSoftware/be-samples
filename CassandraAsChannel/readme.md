@@ -77,6 +77,14 @@ bin/pulsar-admin source create \
 }'
 ```
 
+#### Cassandra Auth settings
+| Name | Description | Type | Validator | Default |
+| :---:   | :---: | :---: |  :---: | :---: |
+| *auth.password*| Password for PLAIN (username/password) provider authentication| password|| [hidden]
+| *auth.provider*| Authentication provider| string| [None, PLAIN]| None
+| *auth.username*| Username for PLAIN (username/password) provider authentication| string|| ""
+
+
 #### Cassandra SSL/TLS settings
 
 | Name | Description | Type | Validator | Default |
