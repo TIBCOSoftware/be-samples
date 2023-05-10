@@ -17,9 +17,9 @@ void rulefunction RuleFunctions.GetGridMedata {
 		
 		Object stringBuff = String.createBuffer(10);
 		
-		if (GlobalProperties.STORE_TYPE == "Cassandra") {
+		/*if (GlobalProperties.STORE_TYPE != "Cassandra") {
 			String.append(stringBuff, "Version - " + Store.Metadata.getVersion(GlobalProperties.STORE_URL) + "\n");
-		}
+		}*/
 		
 		String[] containerNames = Store.Metadata.getContainerNames(GlobalProperties.STORE_URL);
 		for (int i=0; i<containerNames@length; i++) {
