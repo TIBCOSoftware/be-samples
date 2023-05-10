@@ -77,6 +77,25 @@ bin/pulsar-admin source create \
 }'
 ```
 
+#### Cassandra Auth settings
+| Name | Description | Type | Validator | Default |
+| :---:   | :---: | :---: |  :---: | :---: |
+| *auth.password*| Password for PLAIN (username/password) provider authentication| password|| [hidden]
+| *auth.provider*| Authentication provider| string| [None, PLAIN]| None
+| *auth.username*| Username for PLAIN (username/password) provider authentication| string|| ""
+
+
+#### Cassandra SSL/TLS settings
+
+| Name | Description | Type | Validator | Default |
+| :---:   | :---: | :---: |  :---: | :---: |
+| *ssl.hostnameValidation*| Whether or not to validate node hostnames when using SSL| boolean|| true
+| *ssl.keystore.password*| Keystore password| password|| [hidden]
+| *ssl.keystore.path*| The path to the keystore file| string|| ""
+| *ssl.provider*| SSL/TLS provider| string| [None, JDK, OpenSSL]| None
+| *ssl.truststore.password*| Truststore password| password|| [hidden]
+| *ssl.truststore.path*| The path to the truststore file| string|| ""
+
 Then check your connector is in the running state with no errors:
 ```pulsar-admin source status --name cassandra-source-1```
 
