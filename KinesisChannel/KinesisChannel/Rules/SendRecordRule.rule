@@ -1,0 +1,42 @@
+/**
+ * @description 
+ * @author Shrikants-MBP.na.tibco.com
+ */
+rule Rules.SendRecordRule {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.SendEvent s;
+	}
+	when {
+		
+	}
+	then {
+	    
+	    String[] symbol = {"APPL", "GOOG", "MSFT", "TIB", "AMD", "AMZN", "MNT", "ALGN", "NVDA", "FB", "MU"};
+	    String[] type = {"BUY", "SELL"};
+	 
+	   	double tsymbol = Math.random();
+	   	
+	   	double ttype = Math.random();
+	   	
+	    	String tickerSymbol = symbol[Math.floor(10*tsymbol)];
+	    	
+	    	String tradeType;
+	    
+	    if (ttype > 0.4) {
+	         tradeType = type[0];
+	    } else {
+	    	     tradeType = type[1];
+	      }
+	    	
+		Events.StockEvent stockevent = Event.createEvent("xslt://{{/Events/StockEvent}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"tickerSymbol\"/><xsl:param name=\"tradeType\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:attribute name=\"extId\"><xsl:value-of select=\"&quot;abc&quot;\"/></xsl:attribute><tickerSymbol><xsl:value-of select=\"$tickerSymbol\"/></tickerSymbol><tradeType><xsl:value-of select=\"$tradeType\"/></tradeType></event></createEvent></xsl:template></xsl:stylesheet>");
+		Event.sendEvent(stockevent);
+	   
+		Event.consumeEvent(stockevent);   
+	   
+	   System.debugOut("#### Stock Details Sent - Ticker Symbol: " + stockevent.tickerSymbol + " " + "Trade Type: " + stockevent.tradeType + "");
+	}
+}

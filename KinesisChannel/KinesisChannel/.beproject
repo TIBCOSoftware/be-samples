@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration:StudioProjectConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http:///com/tibco/cep/studio/common/configuration/model/project_configuration.ecore" name="KinesisChannel" version="%BE_VERSION_ESC%" build="035" xpathVersion="2.0">
+  <javaSourceFolderEntries entryType="JAVA_SOURCE_FOLDER" path="/KinesisChannel/JavaSrc" readOnly="true"/>
+  <enterpriseArchiveConfiguration name="KinesisChannel" author="TIBCO Software Inc." version="45" path="%TIBCO_BE_HOME_ESC%/examples/standard/KinesisChannel/KinesisChannel.ear" overwrite="true"/>
+  <bpmnProcessSettings/>
+</configuration:StudioProjectConfiguration>

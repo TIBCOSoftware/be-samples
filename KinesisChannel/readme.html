@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Kinesis Channel- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../_resources/examples.css";</style>
+</head>
+<body onLoad="buildForms()">
+
+<h1>KinesisChannel</h1>
+
+<h2>Purpose of This Example</h2>
+
+<p>The KinesisChannel example demonstrates how TIBCO BusinessEvents&reg; uses the Kinesis channel to send and receive events using Kinesis&#0174. You can examine the project in TIBCO BusinessEvents Studio to understand the setup.</p>
+
+<h2>About the project</h2>
+
+<p>The producer agent sends data records to the Kinesis stream. </p>
+<p>The consumer agent subscribes to the Kinesis stream and receives stock events. </p>
+<p>In this example, producer will be triggered at regular intervals. Consumer will process StockEvent via ProcessStockRule from stream.  </p>
+
+<h2>Instructions</h2>
+
+<h3>Running the project</h3>
+
+<ol>
+
+<li><p>You need an AWS account and a web browser to access the AWS Management Console. Create an IAM Policy and User.
+</p>
+</li>
+
+<li><p>Create Kinesis data streams. </p>
+</li>
+
+<li><p>All the appropriate values need to be set in the cdd. </p>
+</li>
+
+<li><p>Open a command window. Start a consumer agent instance.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/KinesisChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u consumer -c KinesisChannel/kinesis.cdd KinesisChannel.ear
+</pre>
+
+</li>
+
+<li><p>Open a command window. Start a producer agent instance.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/KinesisChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u producer -c KinesisChannel/kinesis.cdd KinesisChannel.ear
+</pre>
+
+</li>
+
+<li><p>Make sure data records are sent to respective streams via producer.</p>
+</li>
+
+</ol>
+
+<h3>Output</h3>
+
+<p>Once the BE engine is up, running the producer starts sending stock events periodically and consumer agent processes these events.</p>
+
+
+<h4>Sample output from consumer agent</h4>
+<pre class="commands">
+...
+2018 Oct 25 16:42:55:868 GMT -7 shrikants-mbp.na.tibco.com Info [RecordProcessor-0000] - [user] [inference-consumer] #### Stock Details Received - Ticker Symbol: NVDA Trade Type: BUY
+2018 Oct 25 16:42:55:868 GMT -7 shrikants-mbp.na.tibco.com Info [RecordProcessor-0000] - [user] [inference-consumer]
+2018 Oct 25 16:42:55:868 GMT -7 shrikants-mbp.na.tibco.com Debug [RecordProcessor-0000] - [kernel.core] [inference-consumer] RTC Operations: [Object=be.gen.Events.StockEvent@id=5@extId=abc, RtcOps=101]
+2018 Oct 25 16:42:55:869 GMT -7 shrikants-mbp.na.tibco.com Info [RecordProcessor-0000] - [driver.kinesis] Checkpointing shard
+2018 Oct 25 16:43:00:834 GMT -7 shrikants-mbp.na.tibco.com Debug [RecordProcessor-0000] - [kernel.core] [inference-consumer] Rule Agenda >>> [Rule=be.gen.Rules.ProcessStockRule Objects=be.gen.Events.StockEvent@id=6@extId=abc];
+2018 Oct 25 16:43:00:840 GMT -7 shrikants-mbp.na.tibco.com Info [RecordProcessor-0000] - [user] [inference-consumer] #### Stock Details Received - Ticker Symbol: APPL Trade Type: SELL
+2018 Oct 25 16:43:00:841 GMT -7 shrikants-mbp.na.tibco.com Info [RecordProcessor-0000] - [user] [inference-consumer]
+2018 Oct 25 16:43:00:841 GMT -7 shrikants-mbp.na.tibco.com Debug [RecordProcessor-0000] - [kernel.core] [inference-consumer] RTC Operations: [Object=be.gen.Events.StockEvent@id=6@extId=abc, RtcOps=101]
+
+...
+</pre>
+
+<h4>Sample output from producer agent</h4>
+<pre class="commands">
+...
+2018 Oct 25 16:42:54:206 GMT -7 shrikants-mbp.na.tibco.com Info [main] - [runtime.service] Registering all BE-Engine level Group MBeans...
+2018 Oct 25 16:42:54:207 GMT -7 shrikants-mbp.na.tibco.com Info [main] - [runtime.service] All BE-Engine level Group MBeans SUCCESSFULLY registered
+2018 Oct 25 16:42:54:208 GMT -7 shrikants-mbp.na.tibco.com None [main] - [runtime.session] BE Engine shrikants-mbp.na.tibco.com started
+2018 Oct 25 16:42:54:374 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [util] [inference-producer] Generating schema for '_BaseConcept' [namespace '']
+2018 Oct 25 16:42:54:380 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [util] [inference-producer] Generating schema for '_BaseEvent' [namespace '']
+2018 Oct 25 16:42:54:381 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [util] [inference-producer] Generating schema for '_BaseSOAPEvent' [namespace '']
+2018 Oct 25 16:42:54:382 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [util] [inference-producer] Generating schema for '_BaseTimeEvent' [namespace '']
+2018 Oct 25 16:42:54:384 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [util] [inference-producer] Generating schema for 'StockEvent' [namespace '/Events/']
+2018 Oct 25 16:42:54:385 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [util] [inference-producer] Generating schema for 'SendEvent' [namespace '/Events/']
+2018 Oct 25 16:42:55:347 GMT -7 shrikants-mbp.na.tibco.com Info [inference-producer.HiResTimer] - [user] [inference-producer]
+#### Stock Details Sent - Ticker Symbol: NVDA Trade Type: BUY
+2018 Oct 25 16:42:59:198 GMT -7 shrikants-mbp.na.tibco.com Debug [inference-producer.HiResTimer] - [kernel.core] [inference-producer] Rule Agenda >>> [Rule=be.gen.Rules.SendRecordRule Objects=be.gen.Events.SendEvent@id=3];
+2018 Oct 25 16:42:59:198 GMT -7 shrikants-mbp.na.tibco.com Info [inference-producer.HiResTimer] - [user] [inference-producer]
+
+2018 Oct 25 16:42:59:275 GMT -7 shrikants-mbp.na.tibco.com Info [inference-producer.HiResTimer] - [user] [inference-producer]
+#### Stock Details Sent - Ticker Symbol: APPL Trade Type: SELL
+
+...
+</pre>
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023. Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/**
+ * @description 
+ * @author Shrikants-MBP.na.tibco.com
+ */
+rule Rules.ProcessStockRule {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.StockEvent stockEvent;
+	}
+	when {
+		
+	}
+	then {
+		
+		System.debugOut("#### Stock Details Received - Ticker Symbol: " + stockEvent.tickerSymbol + " " + "Trade Type: " + stockEvent.tradeType + "");
+
+		System.debugOut("");
+	
+	}
+}

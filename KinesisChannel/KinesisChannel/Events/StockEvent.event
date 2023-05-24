@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="StockEvent" description="" GUID="1BBD83BE-570A-0DC7-2CC3-4352875F0851" ownerProjectName="KinesisChannel" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/KinesisChannel" destinationName="Stockdest">
+  <properties name="tickerSymbol" ownerProjectName="KinesisChannel" ownerPath="/Events/StockEvent"/>
+  <properties name="tradeType" ownerProjectName="KinesisChannel" ownerPath="/Events/StockEvent"/>
+  <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+  <expiryAction folder="/Events/StockEvent" name="StockEvent_expiryAction" ownerProjectName="KinesisChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="stockevent" type="/Events/StockEvent"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

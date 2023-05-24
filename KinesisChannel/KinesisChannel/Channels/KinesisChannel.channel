@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="KinesisChannel" description="" GUID="C5712B94-B67E-4606-AE4F-7BB0ECD31C06" ownerProjectName="KinesisChannel">
+  <driver label="KINESIS" channel="/">
+    <properties>
+      <properties xsi:type="designtime:SimpleProperty" name="access_key" value="%%kinesis/access.key%%" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="secret_key" value="%%kinesis/secret.key%%" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="profile_name" value="%%kinesis/profile.name%%"/>
+    </properties>
+    <destinations name="Stockdest" description="" GUID="2A8EE6D4-D0AE-DCAE-5E74-46CA44A847A2" ownerProjectName="KinesisChannel" eventURI="/Events/StockEvent" serializerDeserializerClass="com.tibco.cep.driver.kinesis.serializer.KinesisXmlSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="stream.name" value="%%kinesis/stream.name%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="application.name" value="%%kinesis/application.name%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="max.records" value="%%kinesis/max.records%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="region.name" value="%%kinesis/region.name%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="EventProperty" value="tickerSymbol"/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="Kinesis"/>
+  </driver>
+</channel:Channel>

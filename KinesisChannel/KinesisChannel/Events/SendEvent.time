@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:TimeEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="SendEvent" description="" GUID="B1E878E1-EE1D-D179-189B-A0A68D65789E" ownerProjectName="KinesisChannel" type="TimeEvent" superEventPath="" scheduleType="repeat" timeEventCount="1" interval="5" intervalUnit="Seconds"/>
