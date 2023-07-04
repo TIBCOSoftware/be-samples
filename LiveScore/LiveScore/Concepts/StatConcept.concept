@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" namespace="/Concepts/" folder="/Concepts/" name="StatConcept" description="" GUID="8A9E3CA8-8488-B53F-6601-7973A08BC499" ownerProjectName="LiveScore" superConceptPath="" autoStartStateMachine="true">
+  <extendedProperties/>
+  <properties name="ClearCache" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Duration_of_Credit" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Purpose_of_Credit" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Amount_of_Credit" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Marital_Status" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Gender" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Age" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Occupation" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Credit_Rating" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="Living_in_Current_Household_for" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+  <properties name="WFID" ownerProjectName="LiveScore" ownerPath="/Concepts/StatConcept"/>
+</element:Concept>

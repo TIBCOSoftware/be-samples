@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     LiveScore BE Example
+
+- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../../_resources/examples.css";</style>
+<script type="text/javascript" src="../../../_resources/examples.js" /></script>
+<script type="text/javascript">
+function buildForms() {
+ var form;
+
+
+ SendEventForm.setServer("http://localhost:8108");
+
+
+ form = SendEventForm.get("sendStatisticaEventForm");
+ form.setDestinationPath("/Channels/HTTP/StatisticaOps");
+ form.setEventPath("/Events/StatEvent");
+ form.addProperty("ClearCache", "1");
+ form.addProperty("Duration_of_Credit", "36");
+ form.addProperty("Purpose_of_Credit", "retraining");
+ form.addProperty("Amount_of_Credit", "3003");
+ form.addProperty("Marital_Status", "single");
+ form.addProperty("Gender", "female");
+ form.addProperty("Age", "32");
+ form.addProperty("Occupation", "skilled employee");
+ form.addProperty("Credit_Rating", "good");
+ form.addProperty("Living_in_Current_Household_for", "5-8 years");
+ form.addProperty("WFID", "/Template/CreditScoring_WoE_Example");
+ form.build();
+
+}
+</script>
+</head>
+<body onLoad="buildForms()">
+
+
+<h1>LiveScore Example</h1>
+
+
+<h2>Purpose of This Example</h2>
+
+<p>This example shows you how to use the TIBCO BusinessEvents&reg; LiveScore Example. SOAP request is sent to LiveScore according to the properties given in the Event</p>
+
+<p>This request calls a LiveScore API and returns a response which is the result of the Test data run on the model in LiveScore workspace created given by WFID.</p>
+
+
+<h2>Instructions</h2>
+Before you begin, ensure that the EAR file you want to use is in the <i>BE_HOME</i>/examples/standard/LiveScore folder, where this readme is also stored.
+<ol>
+
+
+<li>
+<p>Open a command window and at the command prompt, start the TIBCO BusinessEvents engine using the following command. Substitute your actual value for <i>BE_HOME</i>.</p>
+
+<pre class="commands">
+cd <i>BE_HOME</i>/examples/standard/Analytics/LiveScore
+<i>BE_HOME</i>/bin/be-engine --propFile <i>BE_HOME</i>\bin\be-engine.tra -u default -c LiveScore/LiveScore.cdd LiveScore.ear
+</pre>
+
+<p>Adapt the command as needed, for example, if you have customized the example project, or are running it from a different directory.</p>
+</li>
+
+
+<li>
+<p>Send a Event to invoke LiveScore API</p>
+
+<form id="sendStatisticaEventForm"></form>
+
+<p>In the command window you see a message like this:
+<span class="logs">Sending Statistica Event </span>
+<div class="logs" style="margin-left:345px;">Answer received from the event is: { ... }</div></p>
+</li>
+
+<!--<li>
+<p>Rules in the project react to various inputs depending on current facts in the Rete network. You can try the following.</p>
+
+<table>
+<tr>
+<th>Action</th>
+<th>Message</th>
+</tr>
+<tr>
+<td>In the /Events/PostEmpl form, enter the same Employee ID two times.</td>
+<td><pre class="logs">#### Employee Account already exists: </pre></td>
+</tr>
+<tr>
+<td>In the /Events/PostEmpl  form, enter a number 0 or below than 0.</td>
+<td><pre class="logs">#### Employee ID is not valid</pre></td>
+</tr>
+
+</table>
+</li>-->
+
+<li>
+<p> To reset the data, restart the engine at the command line.</p>
+</li>
+
+</ol>
+
+
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023 Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

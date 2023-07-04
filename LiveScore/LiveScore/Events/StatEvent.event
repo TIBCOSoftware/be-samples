@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="StatEvent" description="" GUID="CE7BC07C-8EEC-E0FF-505F-FBAE430077E8" ownerProjectName="LiveScore" superEventPath="" ttlUnits="Seconds">
+  <properties name="ClearCache" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Duration_of_Credit" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Purpose_of_Credit" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Amount_of_Credit" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Marital_Status" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Gender" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Age" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Occupation" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Credit_Rating" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="Living_in_Current_Household_for" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <properties name="WFID" ownerProjectName="LiveScore" ownerPath="/Events/StatEvent"/>
+  <expiryAction folder="/Events/StatEvent" name="StatEvent_expiryAction" ownerProjectName="LiveScore" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="statevent" type="/Events/StatEvent"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

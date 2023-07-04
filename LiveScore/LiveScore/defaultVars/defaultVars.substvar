@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<repository xmlns="http://www.tibco.com/xmlns/repo/types/2002">
+    <globalVariables>
+        <globalVariable>
+            <name>STATISTICA_HOST</name>
+            <value>http://localhost:8081/LiveScore</value>
+            <type>String</type>
+            <deploymentSettable>true</deploymentSettable>
+            <serviceSettable>false</serviceSettable>
+            <description/>
+            <constraint/>
+            <modTime>1570101331874</modTime>
+        </globalVariable>
+        <globalVariable>
+            <name>STATISTICA_USERNAME</name>
+            <value></value>
+            <type>String</type>
+            <deploymentSettable>true</deploymentSettable>
+            <serviceSettable>false</serviceSettable>
+            <description/>
+            <constraint/>
+            <modTime>1570101471774</modTime>
+        </globalVariable>
+        <globalVariable>
+            <name>STATISTICA_PASSWORD</name>
+            <value></value>
+            <type>String</type>
+            <deploymentSettable>true</deploymentSettable>
+            <serviceSettable>false</serviceSettable>
+            <description/>
+            <constraint/>
+            <modTime>1570101556585</modTime>
+        </globalVariable>
+    </globalVariables>
+</repository>

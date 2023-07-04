@@ -1,0 +1,33 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.StatStartupRuleFunction {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		
+		System.debugOut("Calling Statistica API");
+		
+		Object connection = Analytics.Statistica.ConnectionInfo.createConnection(System.getGlobalVariableAsString("STATISTICA_HOST", "http://localhost:8081/LiveScore"));
+      	Analytics.Statistica.ConnectionInfo.setBasicAuth(connection, System.getGlobalVariableAsString("STATISTICA_USERNAME", "username"), System.getGlobalVariableAsString("STATISTICA_PASSWORD", "password"));
+		Object parameterMap = Collections.Map.createHashMap();
+		Collections.Map.put(parameterMap, "ClearCache", "1");
+		Collections.Map.put(parameterMap, "Duration_of_Credit", "36");
+		Collections.Map.put(parameterMap, "Purpose_of_Credit", "retraining");
+		Collections.Map.put(parameterMap, "Amount_of_Credit", "3003");
+		Collections.Map.put(parameterMap, "Marital_Status", "single");
+		Collections.Map.put(parameterMap, "Gender", "female");
+		Collections.Map.put(parameterMap, "Age", "32");
+		Collections.Map.put(parameterMap, "Occupation", "skilled employee");
+		Collections.Map.put(parameterMap, "Credit_Rating", "good");
+		Collections.Map.put(parameterMap, "Living_in_Current_Household_for", "5-8 years");
+		Collections.Map.put(parameterMap, "WFID", "/Template/CreditScoring_WoE_Example");
+		
+ 		Object result = Analytics.Statistica.getScoreWithParams(connection, "Live", parameterMap);
+ 		System.debugOut("Answer is:" + result);
+	}
+}
