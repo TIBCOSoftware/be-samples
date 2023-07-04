@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Startup {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		
+	}
+}

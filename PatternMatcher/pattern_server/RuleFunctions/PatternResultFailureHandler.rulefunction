@@ -1,0 +1,19 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PatternResultFailureHandler {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String	patternDefURI;
+		String	patternInstanceName;
+		Object	correlationId;
+		Object	closure;
+		Object	opaque;
+	}
+	body {
+		RuleFunctions.PatternResultHandler(patternDefURI, patternInstanceName, 
+			correlationId, closure, opaque, false);
+	}
+}

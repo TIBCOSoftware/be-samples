@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     Pattern Matcher
+
+- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../_resources/examples.css";</style>
+<script type="text/javascript" src="../../_resources/examples.js" /></script>
+</head>
+<body>
+
+<h1>Pattern Matcher</h1>
+
+<h2>Purpose of This Example</h2>
+
+<p>This example project demonstrates the use of the Pattern Matcher Framework.</p>
+
+
+<p>The remainder of this document explains the key points about the example project, and shows you how to run it.</p>
+
+<h2>Project Description</h2>
+
+<p>This example project has 2 parts - a custom Java Swing interface and a TIBCO BusinessEvents project.</p>
+
+<h3>Pattern Server</h3>
+
+<p>The TIBCO BusinessEvents project has an HTTP Channel to receive events from the custom UI. The project has two sub-sets of Ontology objects: Call simulator events and Park simulator events. There are also a few other  events and rules that take care of handling the input from and output to the custom UI. This "control" layer and related events are modeled after the Model-View-Control design pattern. Request and response data is in the form of XML. This project is like any other inference agent project.</p>
+
+<h3>Pattern Dashboard</h3>
+
+<p>The custom UI has various tabs. The first tab has buttons to connect and manage the Pattern Matcher Framework that runs in the TIBCO BusinessEvents project's agent. XML over HTTP is the underlying interchange format. The custom UI also has an embedded HTTP server to receive notifications, that is, pattern matcher results from the agent. The UI has a tab each for sending Call simulator and Park simulator events. You can use the tabs to simulate scenarios that demonstrate the matching of patterns. New tabs can be opened, or the existing ones can be used to create and deploy patterns. A few tabs are provided with sample patterns. There is also a results tab which displays the results of deployed patterns when they match or fail to match the sample scenarios.</p>
+
+<h2>How to Run the Project</h2>
+
+<h3>Start the Pattern server (Inference agent)</h3>
+<p>You must start the sample inference agent that acts as the pattern server. This BusinessEvents project contains logic to handle pattern deployment and undeployment requests, to process new events arriving from the custom client UI, and to send pattern results to the client.</p>
+
+<pre class="commands">
+cd BE_HOME/examples/event_stream_processing/PatternMatcher/pattern_server
+BE_HOME/bin/be-engine --propFile BE_HOME/bin/be-engine.tra -c Deployments/pattern_server.cdd -u default Deployments/pattern_server.ear
+</pre>
+
+<h3>Start the Pattern dashboard</h3>
+
+<pre class="commands">
+cd BE_HOME/examples/event_stream_processing/PatternMatcher/pattern_dashboard
+<i>TIB_JAVA_HOME</i>/bin/java -jar pattern_dashboard.jar
+</pre>
+
+<p>Use the dashboard to connect to the pattern server inference agent. Start the pattern service and then deploy patterns. Play events using the scenario tabs. Results will appear in the results tab.</p>
+
+<p></p>
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023 Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

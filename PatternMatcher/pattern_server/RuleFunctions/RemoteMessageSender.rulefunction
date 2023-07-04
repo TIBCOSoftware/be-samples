@@ -1,0 +1,52 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.RemoteMessageSender {
+	attribute {
+		validity = ACTION;
+	}
+	scope {		
+		Object closure;
+		String xml;
+	}
+	body {
+		System.debugOut("Attempting to process message with closure [" + closure + "] and data [" + xml + "]");
+		
+		try{
+			String[] values = String.split(closure, ",");
+			
+			String host = null;
+			String port = null;
+			String uri = null;
+			
+			for(int i = 0; i < values@length; i = i + 1){
+				String[] kv = String.split(values[i], "=");
+				
+				if(kv[0] == "callbackHost"){
+					host = kv[1];												
+				}
+				else if(kv[0] == "callbackPort"){
+					port= kv[1];												
+				}
+				else if(kv[0] == "callbackUri"){
+					uri = kv[1];												
+				}
+			}
+			
+			if(host == null || port == null || uri == null){
+				throw Exception.newException(null, "Remote service URI information could not be found", null);
+			}
+			
+			int portI = Number.intValue(port, 10);
+			
+			System.debugOut("Sending message with closure [" + closure + "] to remote HTTP service [" + host + ":" + port + uri + "]");
+			
+			Events.RemoteMsgResponseEvent response = HTTPSender(host, portI, uri, closure, xml);
+			
+			System.debugOut("Sent message with closure [" + closure + "] to remote HTTP service [" + host + ":" + port + uri + "]");
+		}
+		catch(Exception ex){
+			System.debugOut("Error occurred while sending [" + closure + "] to remote service\n" + ex@message + "\n" + ex@stackTrace);
+		}
+	}
+}

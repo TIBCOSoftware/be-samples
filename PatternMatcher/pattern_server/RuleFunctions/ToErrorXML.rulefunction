@@ -1,0 +1,34 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.ToErrorXML {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String optionalMessage;
+		Object optionalException;
+	}
+	body {
+		String msg = optionalMessage;
+		String trace = "";
+		
+		if(optionalException != null){
+			Exception e = optionalException;
+			
+			if(msg == null){
+				msg = e@message;
+			}
+			
+			trace = e@stackTrace;
+		}
+	
+		String xml = 
+			  "<error>" 
+			+ "<msg><![CDATA[" + msg + "]]></msg>" 
+			+ "<trace><![CDATA[" + trace + "]]></trace>" 
+			+ "</error>";
+			
+		return xml;
+	}
+}
