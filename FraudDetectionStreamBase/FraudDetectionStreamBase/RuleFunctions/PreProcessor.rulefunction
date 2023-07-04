@@ -1,0 +1,19 @@
+/**
+ * @description Closes requests from the HTTP server
+ */
+void rulefunction RuleFunctions.PreProcessor {
+	
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Event request;
+		
+	}
+	body {
+		// Replies to the request event, in order to close the HTTP request.
+		// To keep it simple, uses the request event as the response. 
+		Event.replyEvent(request, request);		
+	}
+	
+}

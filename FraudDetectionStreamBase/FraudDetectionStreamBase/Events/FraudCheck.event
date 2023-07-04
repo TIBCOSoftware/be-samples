@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="FraudCheck" description="" GUID="AB0EAE83-6025-7F43-D4B2-5DF1FBBA7B9E" ownerProjectName="FraudDetectionStreamBase" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/StreamBase" destinationName="NewDebitDest">
+  <properties name="AccountId" ownerProjectName="FraudDetectionStreamBase" conceptTypePath="/Events/FraudCheck" ownerPath="/Events/FraudCheck"/>
+  <properties name="Amount" ownerProjectName="FraudDetectionStreamBase" type="double" conceptTypePath="/Events/FraudCheck" ownerPath="/Events/FraudCheck"/>
+  <properties name="TransactionTime" ownerProjectName="FraudDetectionStreamBase" type="DateTime" conceptTypePath="/Events/FraudCheck" ownerPath="/Events/FraudCheck"/>
+  <properties name="AvgMonthlyBalance" ownerProjectName="FraudDetectionStreamBase" type="double" conceptTypePath="/Events/FraudCheck" ownerPath="/Events/FraudCheck"/>
+  <expiryAction folder="/Events/FraudCheck" name="SBDebit_expiryAction" ownerProjectName="FraudDetectionStreamBase" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="sbdebit" type="/Events/FraudCheck"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

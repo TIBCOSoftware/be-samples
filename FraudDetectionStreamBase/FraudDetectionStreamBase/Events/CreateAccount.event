@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="CreateAccount" description="Triggers the CreateAccount rule to create an account" GUID="F231A528-7AF3-B955-5410-E3E98E67C301" ownerProjectName="FraudDetectionStreamBase" superEventPath="/Events/AccountOperations" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="AllOps">
+  <extendedProperties/>
+  <properties name="AvgMonthlyBalance" ownerProjectName="FraudDetectionStreamBase" type="double" ownerPath="/Events/CreateAccount"/>
+  <properties name="Balance" ownerProjectName="FraudDetectionStreamBase" type="double" ownerPath="/Events/CreateAccount"/>
+  <expiryAction folder="/Events/CreateAccount" name="CreateAccount_expiryAction" ownerProjectName="FraudDetectionStreamBase" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="createaccount" type="/Events/CreateAccount"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

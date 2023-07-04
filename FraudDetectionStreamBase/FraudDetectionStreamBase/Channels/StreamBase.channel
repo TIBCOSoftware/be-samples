@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="StreamBase" description="This channel is used to send and receive tuples to and from StreamBase CEP, where checks for fraudulent debit transactions will be performed" GUID="FA48609B-5865-97BB-C2AC-CF2AA3B9D170" ownerProjectName="FraudDetectionStreamBase">
+  <driver label="STREAMBASE" channel="/">
+    <properties>
+      <properties xsi:type="designtime:SimpleProperty" name="StreamBaseServerURI" value="sb://localhost:10000/"/>
+      <properties xsi:type="designtime:SimpleProperty" name="UserName" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="Password" value=""/>
+    </properties>
+    <destinations folder="/Channels/StreamBase/" name="FraudDetectedDest" description="If a debit is suspected of being a fraudulent transaction, StreamBase will emit a tuple on this output stream to indicate the account should be suspended" GUID="5EF97709-0141-037A-775C-B8D2738D63C6" ownerProjectName="FraudDetectionStreamBase" eventURI="/Events/Suspend" serializerDeserializerClass="com.tibco.cep.driver.sb.serializers.StreamBaseSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="StreamName" value="FraudDetected"/>
+        <properties xsi:type="designtime:SimpleProperty" name="ClientType" value="DEQUEUER"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Predicate" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="EnableBuffering" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="BufferSize" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="FlushInterval" value="250"/>
+      </properties>
+    </destinations>
+    <destinations name="NewDebitDest" description="When a debit is processed, a tuple will be sent to this StreamBase input stream to check the transaction for evidence of fraud" GUID="1134676E-24DE-5E0B-C72F-F883EEAA1881" ownerProjectName="FraudDetectionStreamBase" eventURI="/Events/FraudCheck" serializerDeserializerClass="com.tibco.cep.driver.sb.serializers.StreamBaseSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="StreamName" value="NewDebit"/>
+        <properties xsi:type="designtime:SimpleProperty" name="ClientType" value="ENQUEUER"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Predicate" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="EnableBuffering" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="BufferSize" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="FlushInterval" value="250"/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="StreamBase"/>
+  </driver>
+</channel:Channel>

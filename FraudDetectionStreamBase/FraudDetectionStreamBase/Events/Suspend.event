@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="Suspend" description="" GUID="D2D0C1FA-451A-FC07-C6BB-988B1126B3EE" ownerProjectName="FraudDetectionStreamBase" ttlUnits="Seconds" channelURI="/Channels/StreamBase" destinationName="FraudDetectedDest">
+  <properties name="Reason" ownerProjectName="FraudDetectionStreamBase" conceptTypePath="/Events/Suspend" ownerPath="/Events/Suspend"/>
+  <properties name="AccountId" ownerProjectName="FraudDetectionStreamBase" ownerPath="/Events/Suspend"/>
+  <expiryAction folder="/Events/Suspend" name="FraudDetected_expiryAction" ownerProjectName="FraudDetectionStreamBase" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="frauddetected" type="/Events/Suspend"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

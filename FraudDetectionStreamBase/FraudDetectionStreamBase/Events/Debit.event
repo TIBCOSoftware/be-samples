@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="Debit" description="Specifies an account (by inheritance) and a debit amount" GUID="8CAEE0CC-FEF1-5016-CE70-50D11B3929AC" ownerProjectName="FraudDetectionStreamBase" superEventPath="/Events/AccountOperations" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="AllOps">
+  <extendedProperties/>
+  <properties name="Amount" ownerProjectName="FraudDetectionStreamBase" type="double" ownerPath="/Events/Debit"/>
+  <expiryAction folder="/Events/Debit" name="Debit_expiryAction" ownerProjectName="FraudDetectionStreamBase" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="debit" type="/Events/Debit"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

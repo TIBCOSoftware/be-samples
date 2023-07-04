@@ -1,0 +1,37 @@
+/**
+ * @description Check for fraud with the help of StreamBase CEP
+ * @author 
+ */
+rule Rules.FraudDetection {
+	
+	attribute {
+		priority = 2;
+		forwardChain = true;
+	}
+	
+	declare {
+		Concepts.Account	account;	
+		Events.Debit debit;
+
+	}
+	
+	when {
+		account@extId == debit.AccountId;
+		account.Status != "Suspended";
+
+	}
+	
+	then {
+		// Create an event that will be used to send a tuple to StreamBase CEP
+		Events.FraudCheck fraudcheck = Event.createEvent("xslt://{{/Events/FraudCheck}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" version=\"1.0\" exclude-result-prefixes=\"xsl xsd\">\n    <xsl:output method=\"xml\"/>\n    <xsl:param name=\"debit\"/>\n    <xsl:param name=\"account\"/>\n    <xsl:template name=\"Function\" match=\"/\">\n        <createEvent>\n            <event>\n                <xsl:if test=\"$debit/AccountId\">\n                    <AccountId>\n                        <xsl:value-of select=\"$debit/AccountId\"/>\n                    </AccountId>\n                </xsl:if>\n                <xsl:if test=\"$debit/Amount\">\n                    <Amount>\n                        <xsl:value-of select=\"$debit/Amount\"/>\n                    </Amount>\n                </xsl:if>\n                <TransactionTime>\n                    <xsl:value-of select=\"current-dateTime()\"/>\n                </TransactionTime>\n                <xsl:if test=\"$account/AvgMonthlyBalance\">\n                    <AvgMonthlyBalance>\n                        <xsl:value-of select=\"$account/AvgMonthlyBalance\"/>\n                    </AvgMonthlyBalance>\n                </xsl:if>\n            </event>\n        </createEvent>\n    </xsl:template>\n</xsl:stylesheet>");
+
+		// Send the debit transaction to SB for fraud detection.
+		//
+		// If fraud is detected, StreamBase will emit a tuple on its FraudDetected output stream
+		// which /Channels/StreamBase/FraudDetectedDest will receive and emit as a Suspend event.
+		Event.sendEvent(fraudcheck);
+
+		Event.consumeEvent(debit);
+	}
+	
+}

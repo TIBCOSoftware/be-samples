@@ -1,0 +1,26 @@
+/**
+ * @description Suspends the account due to fraud. The Events.Suspend events triggering this rule are sent from StreamBase CEP and received by /Channels/StreamBase/FraudDetectedDest
+ * @author 
+ */
+rule Rules.SuspendAccount {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.Suspend	fraud;
+		Concepts.Account	account;
+		
+	}
+	when {
+		account@extId == fraud.AccountId;
+		account.Status != "Suspended";
+		
+	}
+	then {
+		System.debugOut("#### Account ID " + account@extId + " STATUS set to Suspended. Fraud suspected. Reason: " + fraud.Reason);
+		account.Status = "Suspended";
+		Event.consumeEvent(fraud);
+
+	}
+}

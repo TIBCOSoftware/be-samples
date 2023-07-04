@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="AccountOperations" description="Parent event for all account-related events" GUID="0A97E462-FB0C-36DB-ED7D-13D02E907313" ownerProjectName="FraudDetectionStreamBase" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="AllOps">
+  <extendedProperties/>
+  <properties name="AccountId" ownerProjectName="FraudDetectionStreamBase" ownerPath="/Events/AccountOperations"/>
+  <expiryAction folder="/Events/AccountOperations" name="AccountOperations_expiryAction" ownerProjectName="FraudDetectionStreamBase" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="accountoperations" type="/Events/AccountOperations"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>
