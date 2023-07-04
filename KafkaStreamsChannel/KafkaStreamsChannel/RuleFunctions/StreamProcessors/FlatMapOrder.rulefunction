@@ -1,0 +1,35 @@
+/**
+ * @description 
+ */
+Object rulefunction RuleFunctions.StreamProcessors.FlatMapOrder {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Object recordValue;
+	}
+	body {
+		Object itemList = Collections.List.createArrayList();
+		try {
+			Object rootNode = JSON.parseJSON(recordValue);
+			Object payloadNode = JSON.getNode(rootNode, "payload");
+			Object orderNode = JSON.getNode(payloadNode, "Order");
+			Object itemNode = JSON.getNode(orderNode, "items");
+			Object orderItemIter = JSON.getAllElements(itemNode);
+			while(Collections.Iterator.hasNext(orderItemIter)) {
+				Object orderItemNode = Collections.Iterator.next(orderItemIter);
+				String orderItemJsonStr = orderItemNode;
+				Collections.List.add(itemList, Collections.size(itemList), orderItemJsonStr);
+			}
+
+		} catch (Exception e) {
+			System.debugOut(e@stackTrace);
+		}
+		if(Collections.size(itemList) <= 0) {
+			Collections.List.add(itemList, Collections.size(itemList), recordValue);
+			return itemList;
+		} else {
+			return itemList;
+		}
+	}
+}

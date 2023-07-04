@@ -1,0 +1,21 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.StreamProcessors.SelectItemNameAsKey {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Object recordKey;
+		Object recordValue;
+	}
+	body {
+		try {
+			Object rootNode = JSON.parseJSON(recordValue);
+			Object itemNameNode = JSON.getNode(rootNode, "item_name");
+			return JSON.getTextValue(itemNameNode);
+		} catch (Exception e) {
+			return recordKey;
+		}
+	}
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="CustomerOrderCount" description="" GUID="099B00BF-91F1-6A4A-4D45-1E75A1D05F44" ownerProjectName="KafkaStreamsChannel" superEventPath="" ttlUnits="Seconds">
+  <properties name="RECORD_KEY" ownerProjectName="KafkaStreamsChannel" ownerPath="/Events/CustomerOrderCount"/>
+  <properties name="RECORD_VALUE" ownerProjectName="KafkaStreamsChannel" type="long" ownerPath="/Events/CustomerOrderCount"/>
+  <expiryAction name="CustomerOrderCount_expiryAction" ownerProjectName="KafkaStreamsChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="customerordercount" type="/Events/CustomerOrderCount"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

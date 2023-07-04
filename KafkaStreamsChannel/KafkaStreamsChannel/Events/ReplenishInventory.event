@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="ReplenishInventory" description="" GUID="08055139-D318-9975-447E-8438DF425741" ownerProjectName="KafkaStreamsChannel" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Kafka" destinationName="ReplenInventory">
+  <properties name="item_name" ownerProjectName="KafkaStreamsChannel" ownerPath="/Events/ReplenishInventory"/>
+  <properties name="replen_qty" ownerProjectName="KafkaStreamsChannel" type="int" ownerPath="/Events/ReplenishInventory"/>
+  <expiryAction folder="/Events/ReplenishInventory" name="ReplenishInventory_expiryAction" ownerProjectName="KafkaStreamsChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="replenishinventory" type="/Events/ReplenishInventory"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element:Scorecard xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" namespace="/" folder="/" name="InventorySnapshot" description="Maintain current inventory quantity available to ship." GUID="736D1D71-B5FF-18C6-3F62-BADF23206D6B" ownerProjectName="KafkaStreamsChannel" scorecard="true">
+  <properties name="NoteBookQty" ownerProjectName="KafkaStreamsChannel" type="int" ownerPath="/InventorySnapshot"/>
+  <properties name="PencilQty" ownerProjectName="KafkaStreamsChannel" type="int" ownerPath="/InventorySnapshot"/>
+</element:Scorecard>

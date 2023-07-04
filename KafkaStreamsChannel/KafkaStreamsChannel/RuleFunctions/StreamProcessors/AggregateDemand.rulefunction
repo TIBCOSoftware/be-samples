@@ -1,0 +1,37 @@
+/**
+ * @description 
+ */
+Object rulefunction RuleFunctions.StreamProcessors.AggregateDemand {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Object recordKey;
+		Object recordValue;
+		Object aggregateValue;
+	}
+	body {
+		if(aggregateValue == "") {
+			return recordValue;
+		} else {
+			Object valueRootNode = JSON.parseJSON(recordValue);
+			Object itemNameNode = JSON.getNode(valueRootNode, "item_name");
+			Object quantityNode = JSON.getNode(valueRootNode, "quantity");
+			
+			String itemName = JSON.getTextValue(itemNameNode);
+			int quantity = Number.intValue(JSON.getTextValue(quantityNode), 10);
+			
+			Object aggregateRootNode = JSON.parseJSON(aggregateValue);
+			Object quantityDemandNode = JSON.getNode(aggregateRootNode, "demand_quantity");
+			int quantityDemand = 0;
+			if(quantityDemandNode != null) {
+				 quantityDemand = Number.intValue(JSON.getTextValue(quantityDemandNode), 10);
+			}
+			quantityDemand = quantityDemand + quantity;
+			
+			Events.AggregatedDemand e = Events.AggregatedDemand.AggregatedDemand(null, null, itemName, quantityDemand, 0);
+
+			return Event.serializeToJSON(e, false);
+		}
+	}
+}

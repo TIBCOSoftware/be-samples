@@ -1,0 +1,19 @@
+/**
+ * @description 
+ * @author Shivkumars-MacBook-Pro.local
+ */
+rule Rules.CustomerOrderCount {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.CustomerOrderCount e;
+	}
+	when {
+		
+	}
+	then {
+		System.debugOut("#### Number of Orders By Customer: Customer=" + e.RECORD_KEY + ", Count=" + e.RECORD_VALUE); 
+	}
+}

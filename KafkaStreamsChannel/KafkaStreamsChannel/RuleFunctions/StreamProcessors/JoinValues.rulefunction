@@ -1,0 +1,37 @@
+/**
+ * @description 
+ */
+Object rulefunction RuleFunctions.StreamProcessors.JoinValues {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Object aggregatedDemand;
+		Object availableInventory;
+	}
+	body {
+		try {		
+			Object rootNode = JSON.parseJSON(availableInventory);
+			Object availableQtyNode = JSON.getNode(rootNode, "available_quantity");
+			int availableQty = Number.intValue(JSON.getTextValue(availableQtyNode), 10);
+			
+			Object aggDemandNode = JSON.parseJSON(aggregatedDemand);
+			Object itemNameNode = JSON.getNode(aggDemandNode, "item_name");
+			Object demandQtyNode = JSON.getNode(aggDemandNode, "demand_quantity");
+			int demandQty = 0;
+			if(demandQtyNode == null) {
+				demandQtyNode = JSON.getNode(aggDemandNode, "demand_quantity");
+			}
+			String itemName = JSON.getTextValue(itemNameNode);
+			demandQty = Number.intValue(JSON.getTextValue(demandQtyNode), 10);
+				
+			Events.AggregatedDemand e = Events.AggregatedDemand.AggregatedDemand(null, null, itemName, demandQty, availableQty);
+			return Event.serializeToJSON(e, true);
+
+		} catch(Exception ex) {
+			System.debugOut("Aggregated Demand: " + aggregatedDemand + ", Available Inventory: " + availableInventory);
+		}
+		
+		return aggregatedDemand;
+	}
+}

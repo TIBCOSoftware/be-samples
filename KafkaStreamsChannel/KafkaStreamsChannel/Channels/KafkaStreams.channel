@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="KafkaStreams" description="" GUID="FDAC969A-CB67-983E-358D-084E7AD18949" ownerProjectName="KafkaStreamsChannel">
+  <driver label="KAFKA STREAMS" channel="/">
+    <properties>
+      <properties xsi:type="designtime:SimpleProperty" name="kafka.broker.urls" value="%%kafka/broker.url%%" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="kafka.security.protocol" value="PLAINTEXT" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="kafka.sasl.mechanism" value="PLAIN"/>
+      <properties xsi:type="designtime:SimpleProperty" name="kafka.trusted.certs.folder" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="kafka.keystore.identity" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="kafka.truststore.password" value=""/>
+    </properties>
+    <destinations name="OrderStream" description="" GUID="787E1DC4-9091-EEBE-9126-942C1C0C893A" ownerProjectName="KafkaStreamsChannel" eventURI="/Events/ItemDemand" serializerDeserializerClass="com.tibco.cep.driver.kafka.serializer.KafkaJsonSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="NEVER" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="topic.name" value="%%kafka.destination/order.topic%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="regex.pattern" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="application.id" value="%%kafkastreams/order.application.id%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="key.serdes" value="String"/>
+        <properties xsi:type="designtime:SimpleProperty" name="value.serdes" value="String"/>
+        <properties xsi:type="designtime:SimpleProperty" name="auto.offset.reset" value="EARLIEST"/>
+        <properties xsi:type="designtime:SimpleProperty" name="processing.guarantee" value="at_least_once"/>
+        <properties xsi:type="designtime:SimpleProperty" name="processor.topology" value="{&quot;transformations&quot;:[{&quot;type&quot;:&quot;FlatMapValues&quot;,&quot;inputs&quot;:{&quot;ValueMapper&quot;:&quot;/RuleFunctions/StreamProcessors/FlatMapOrder&quot;}},{&quot;type&quot;:&quot;SelectKey&quot;,&quot;inputs&quot;:{&quot;KeyValueMapper&quot;:&quot;/RuleFunctions/StreamProcessors/SelectItemNameAsKey&quot;}},{&quot;type&quot;:&quot;GroupByKey&quot;,&quot;inputs&quot;:{}},{&quot;type&quot;:&quot;Aggregate&quot;,&quot;inputs&quot;:{&quot;Initializer&quot;:&quot;/RuleFunctions/StreamProcessors/InitilizeDemand&quot;,&quot;Aggregator&quot;:&quot;/RuleFunctions/StreamProcessors/AggregateDemand&quot;}},{&quot;type&quot;:&quot;ToStream&quot;,&quot;inputs&quot;:{}},{&quot;type&quot;:&quot;Join&quot;,&quot;inputs&quot;:{&quot;Topic&quot;:&quot;be_kafka_inventory_topic&quot;,&quot;ValueJoiner&quot;:&quot;/RuleFunctions/StreamProcessors/JoinValues&quot;,&quot;JoinWindows&quot;:{&quot;window&quot;:&quot;5&quot;,&quot;after&quot;:0,&quot;before&quot;:0,&quot;grace&quot;:0},&quot;JoinWindowUnits&quot;:{&quot;window&quot;:&quot;Minutes&quot;,&quot;after&quot;:&quot;Minutes&quot;,&quot;before&quot;:&quot;Minutes&quot;,&quot;grace&quot;:&quot;Minutes&quot;}}}]}"/>
+      </properties>
+    </destinations>
+    <destinations name="CustomerOrderCount" description="" GUID="8CA33FAF-870D-FE87-76C2-D685BCF900A7" ownerProjectName="KafkaStreamsChannel" eventURI="/Events/CustomerOrderCount" serializerDeserializerClass="com.tibco.cep.driver.kafkastreams.serializer.KeyValueSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="NEVER" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="topic.name" value="%%kafka.destination/order.topic%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="regex.pattern" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="application.id" value="%%kafkastreams/customer.application.id%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="key.serdes" value="String"/>
+        <properties xsi:type="designtime:SimpleProperty" name="value.serdes" value="String"/>
+        <properties xsi:type="designtime:SimpleProperty" name="auto.offset.reset" value="EARLIEST"/>
+        <properties xsi:type="designtime:SimpleProperty" name="processing.guarantee" value="at_least_once"/>
+        <properties xsi:type="designtime:SimpleProperty" name="processor.topology" value="{&quot;transformations&quot;:[{&quot;type&quot;:&quot;SelectKey&quot;,&quot;inputs&quot;:{&quot;KeyValueMapper&quot;:&quot;/RuleFunctions/StreamProcessors/SelectCustomerAsKey&quot;}},{&quot;type&quot;:&quot;GroupByKey&quot;,&quot;inputs&quot;:{}},{&quot;type&quot;:&quot;Count&quot;,&quot;inputs&quot;:{}}]}"/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="Kafka Streams"/>
+  </driver>
+</channel:Channel>

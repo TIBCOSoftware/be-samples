@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="OrderEvent" description="" GUID="F096362C-8825-F512-867B-C6CCF35D018B" ownerProjectName="KafkaStreamsChannel" superEventPath="" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&#xA;&lt;payload ref=&quot;pfx:Order&quot;/>" ttlUnits="Seconds" channelURI="/Channels/Kafka" destinationName="PublishOrders">
+  <properties name="order_id" ownerProjectName="KafkaStreamsChannel" ownerPath="/Events/OrderEvent"/>
+  <properties name="customer_id" ownerProjectName="KafkaStreamsChannel" ownerPath="/Events/OrderEvent"/>
+  <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+  <namespaceEntries prefix="pfx" namespace="www.tibco.com/be/ontology/Concepts/Order"/>
+  <registryImportEntries location="Concepts/Order.concept" namespace="www.tibco.com/be/ontology/Concepts/Order"/>
+  <expiryAction folder="/Events/OrderEvent" name="OrderEvent_expiryAction" ownerProjectName="KafkaStreamsChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="orderevent" type="/Events/OrderEvent"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.Producer.InventoryRecordKey {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.InventoryStatus e;
+	}
+	body {
+		return e.item_name;
+	}
+}

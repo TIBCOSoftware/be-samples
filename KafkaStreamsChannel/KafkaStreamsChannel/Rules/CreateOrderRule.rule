@@ -1,0 +1,39 @@
+/**
+ * @description Creates and sends out OrderEvents.
+ * @author
+ */
+rule Rules.CreateOrderRule {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.PublishOrderTimer t;
+	}
+	when {
+		
+	}
+	then {
+		String orderId = "ORD" + System.currentTimeMillis();//a unique order id
+		
+		int cId = Math.random() * 10;//A random number between [0,10)
+		String customerId = "CUST_" + cId;//This will ensure a set of repeating customer ids
+		
+		Concepts.OrderItem pencils = Concepts.OrderItem.OrderItem(null, "Pencil", 1.25, 20);
+		Concepts.OrderItem books = Concepts.OrderItem.OrderItem(null, "NoteBook", 3.50, 12);
+		
+		Concepts.Order order = Concepts.Order.Order(null, null);
+		Instance.PropertyArray.appendContainedConcept(order.items, pencils, 1L);
+		Instance.PropertyArray.appendContainedConcept(order.items, books, 1L);
+		
+		double ordAmount = RuleFunctions.Producer.CalculateOrderAmout(order);
+		
+		Events.OrderEvent ord = Event.createEvent("xslt://{{/Events/OrderEvent}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:tns=\"www.tibco.com/be/ontology/Concepts/Order\" version=\"2.0\"><xsl:param name=\"order\"/><xsl:param name=\"customerId\"/><xsl:param name=\"orderId\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><order_id><xsl:value-of select=\"$orderId\"/></order_id><customer_id><xsl:value-of select=\"$customerId\"/></customer_id><payload><tns:Order><xsl:if test=\"$order/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$order/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$order/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$order/@Id\"/></xsl:attribute></xsl:if><xsl:copy-of select=\"$order/items\"/></tns:Order></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+		
+		Events.OrderEvent response = Event.sendEvent(ord);
+		
+		if (response != null) {
+			System.debugOut("#### Order created: " + ord.order_id + " Amount: $" + ordAmount + " Customer:" + ord.customer_id);
+		}
+	}
+}

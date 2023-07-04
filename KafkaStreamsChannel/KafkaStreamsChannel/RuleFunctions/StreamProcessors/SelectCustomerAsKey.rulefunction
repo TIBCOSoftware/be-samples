@@ -1,0 +1,21 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.StreamProcessors.SelectCustomerAsKey {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Object recordKey;
+		Object recordValue;
+	}
+	body {
+		try {
+			Object rootNode = JSON.parseJSON(recordValue);
+			Object custIdNode = JSON.getNode(rootNode, "customer_id");
+			return JSON.getTextValue(custIdNode);
+		} catch (Exception e) {
+			return recordKey;
+		}
+	}
+}

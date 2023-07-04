@@ -1,0 +1,14 @@
+/**
+ * @description Initialize aggregate stream processor. As aggregate uses a json string to store result, start with an empty string.
+ */
+Object rulefunction RuleFunctions.StreamProcessors.InitilizeDemand {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		return "";
+	}
+}

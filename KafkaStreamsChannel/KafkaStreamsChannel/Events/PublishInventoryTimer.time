@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:TimeEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="PublishInventoryTimer" description="" GUID="58A6F287-251B-803E-36C3-0B2BE5281C7C" ownerProjectName="KafkaStreamsChannel" type="TimeEvent" superEventPath="" scheduleType="repeat" timeEventCount="1" interval="30" intervalUnit="Seconds"/>

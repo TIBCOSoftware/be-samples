@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="InventoryStatus" description="" GUID="E995A80A-1799-C0F2-68E5-0757D7AEDDCC" ownerProjectName="KafkaStreamsChannel" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Kafka" destinationName="PublishInventory">
+  <properties name="item_name" ownerProjectName="KafkaStreamsChannel" conceptTypePath="/Events/InventoryStatus" ownerPath="/Events/InventoryStatus"/>
+  <properties name="available_quantity" ownerProjectName="KafkaStreamsChannel" type="int" conceptTypePath="/Events/InventoryStatus" ownerPath="/Events/InventoryStatus"/>
+  <expiryAction folder="/Events/InventoryStatus" name="Inventory_expiryAction" ownerProjectName="KafkaStreamsChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="inventory" type="/Events/InventoryStatus"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<repository xmlns="http://www.tibco.com/xmlns/repo/types/2002">
+    <globalVariables>
+        <globalVariable>
+            <name>order.application.id</name>
+            <value>be_kafka_order_streams</value>
+            <type>String</type>
+            <deploymentSettable>true</deploymentSettable>
+            <serviceSettable>false</serviceSettable>
+            <description/>
+            <constraint/>
+            <modTime>1571352508885</modTime>
+        </globalVariable>
+        <globalVariable>
+            <name>customer.application.id</name>
+            <value>be_kafka_count_streams</value>
+            <type>String</type>
+            <deploymentSettable>true</deploymentSettable>
+            <serviceSettable>false</serviceSettable>
+            <description/>
+            <constraint/>
+            <modTime>1571352531420</modTime>
+        </globalVariable>
+    </globalVariables>
+</repository>

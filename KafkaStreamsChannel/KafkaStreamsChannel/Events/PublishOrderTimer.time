@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:TimeEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="PublishOrderTimer" description="" GUID="4025E02A-2050-760E-7E41-1032D0B3F90F" ownerProjectName="KafkaStreamsChannel" type="TimeEvent" superEventPath="" scheduleType="repeat" timeEventCount="1" interval="10" intervalUnit="Seconds"/>

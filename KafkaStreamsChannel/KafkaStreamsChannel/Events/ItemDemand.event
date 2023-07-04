@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="ItemDemand" description="" GUID="E18BFED4-14D7-D30C-8210-7926FFFFB95E" ownerProjectName="KafkaStreamsChannel" superEventPath="" ttlUnits="Seconds">
+  <properties name="item_name" ownerProjectName="KafkaStreamsChannel" ownerPath="/Events/ItemDemand"/>
+  <properties name="available_quantity" ownerProjectName="KafkaStreamsChannel" type="int" ownerPath="/Events/ItemDemand"/>
+  <properties name="demand_quantity" ownerProjectName="KafkaStreamsChannel" type="int" ownerPath="/Events/ItemDemand"/>
+  <expiryAction folder="/Events/ItemDemand" name="ItemDemand_expiryAction" ownerProjectName="KafkaStreamsChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="itemdemand" type="/Events/ItemDemand"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

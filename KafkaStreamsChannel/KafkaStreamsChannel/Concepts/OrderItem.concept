@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" namespace="/Concepts/" folder="/Concepts/" name="OrderItem" description="" GUID="A980EA08-A3A3-4F30-CD92-EDAEE5B929BA" ownerProjectName="KafkaStreamsChannel" superConceptPath="" autoStartStateMachine="true">
+  <extendedProperties/>
+  <properties name="item_name" ownerProjectName="KafkaStreamsChannel" ownerPath="/Concepts/OrderItem"/>
+  <properties name="price" ownerProjectName="KafkaStreamsChannel" type="double" ownerPath="/Concepts/OrderItem"/>
+  <properties name="quantity" ownerProjectName="KafkaStreamsChannel" type="int" ownerPath="/Concepts/OrderItem"/>
+</element:Concept>

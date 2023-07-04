@@ -1,0 +1,25 @@
+/**
+ * @description 
+ * @author
+ */
+rule Rules.ReplenishInventory {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.ReplenishInventory replen;
+	}
+	when {
+		
+	}
+	then {
+		//System.debugOut("#### Replenish Item: " + replen.item_name + " Qty: " + replen.replen_qty);
+		if(replen.item_name == "NoteBook") {
+			InventorySnapshot.NoteBookQty = replen.replen_qty + 100;
+		}
+		if(replen.item_name == "Pencil") {
+			InventorySnapshot.PencilQty = replen.replen_qty + 100;
+		}
+	}
+}

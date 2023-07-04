@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     Kafka Streams Channel
+
+- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../_resources/examples.css";</style>
+</head>
+<body onLoad="buildForms()">
+
+
+<h2>Purpose of This Example</h2>
+
+<p>The KafkaStreamsChannel example demonstrates how TIBCO BusinessEvents&reg; can be configured to use Apache Kafka Streams to process and analyze data stored in Kafka topics&#0174. You can examine the project in TIBCO BusinessEvents Studio to understand the setup, and refer to <i>TIBCO BusinessEvents Developer's Guide</i> for details on channel configuration. </p>
+
+<h2>About the project</h2>
+
+<p>The project has 2 inference agent classes - a producer agent that creates and sends Order and Inventory events and a streams agent that uses Kafka Stream to process records from Kafka topic and then serialize the output to events.</p>
+
+<p>The producer agent leverages Kafka channel to send message to Kafka topics. The Order Events are created and send to a Kafka destination every 10 seconds. The Inventory event is create and send to another Kafka destination every 30 seconds. The inventory snapshot for a session is stored using a Scorecard.</p>
+
+<p>The streams agent includes 2 Kafka Streams destinations in agent's input destination config. A Kafka Streams processor topology is configured on each destination to process order records using various transformations. The processor topology on each destination is explained below.
+
+<h4>OrderStream destination</h4> 
+The records on Kafka topic are transformed by the processor topology and finally an event is created using KafkaJsonSerialier. The KafkaJsonSerializer decodes the record's value as JSON string and deserializes it to create ItemDemand event. The processor topology configured on OrderStream destination perform transformations in following order.</p>
+
+<ol>
+<li>FlatMap - Flattens out the Order into multiple records per line item.</li>
+<li>SelectKey - Selects item name as record key.</li>
+<li>GroupByKey - Groups the stream by record key i.e. item name.</li>
+<li>Aggregate - Aggregates the records grouped by key to calculate total demand quantity form an item by adding quantity ordered per line item.</li>
+<li>ToStream - Converts the result of aggregate to a stream for further transformations.</li>
+<li>Join - Performs a key join with records from Inventory stream. The output of join provides a consolidated item record with the demand quantity and the quantity available to ship inventory.</li>
+</ol>
+
+<p>The ItemDemand event triggers a rule and when demand quantity exceeds quantity available to ship, its action is executed to send a ReplenishInventory event.</p>
+
+<h4>CustomerOrderCount destination</h4> 
+The records on Kafka topic are transformed by the processor topology and finally an event is created using KeyValueSerialier. The KeyValueSerialier decodes the record's key and value as primitive types and deserializes it to create CustomerOrderCount event. The processor topology configured on CustomerOrderCount destination perform transformations in following order.</p>
+<ol>
+<li>SelectKey - Selects customer id as record key.</li>
+<li>GroupByKey - Groups the stream by record key i.e. item name.</li>
+<li>Count - Aggregates the records grouped by key to count the orders by customer id.</li>
+</ol>
+
+<p>The CustomerOrderCount event triggers a rule, that simply print the customer id and order count to console.</p>
+
+
+<h3>Running the project</h3>
+
+<ol>
+
+<li><p>Make sure that Kafka Server is running locally with broker url <code>localhost:9092</code>.</p>
+</li>
+
+<li><p>Open a command window. Start a producer agent instance.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/KafkaStreamsChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u kafka-producer -c KafkaStreamsChannel/Deployments/KafkaStreams.cdd KafkaStreamsChannel.ear
+</pre></li>
+
+
+<li><p>Open another command window and start a streams agent instance.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/KafkaStreamsChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u kafka-streams -c KafkaStreamsChannel/Deployments/KafkaStreams.cdd KafkaStreamsChannel.ear
+</pre>
+
+
+<p>Note: Optionally you may start another kafka-streams agent instance using above command and witness how Kafka Streams distributes tasks across multiple instances with same application id. </p>
+
+</li>
+</ol>
+
+<h3>Output</h3>
+
+<p>Once the engines are up and running the kafka-producer agent starts sending Order and Inventory Events periodically and kafka-streams agent processes these Events.</p>
+
+<h4>Sample output from the kafka-producer agent</h4>
+<pre class="commands">
+...
+2019 Oct 02 16:54:36:191 GMT -4 P Info [inference-class_producer.HiResTimer] - [user] [inference-class_producer] #### Published Inventory Item:NoteBook, Available Quantity:100
+2019 Oct 02 16:54:36:192 GMT -4 P Info [inference-class_producer.HiResTimer] - [user] [inference-class_producer] #### Published Inventory Item:Pencil, Available Quantity:300
+...
+2019 Oct 02 16:54:46:189 GMT -4 P Info [inference-class_producer.HiResTimer] - [user] [inference-class_producer] #### Order created: ORD1570049686186 Amount: $67.0 Customer:CUST_7
+2019 Oct 02 16:54:56:188 GMT -4 P Info [inference-class_producer.HiResTimer] - [user] [inference-class_producer] #### Order created: ORD1570049696183 Amount: $67.0 Customer:CUST_7
+...
+</pre>
+
+<h4>Sample output from kafka-streams agent</h4>
+<pre class="commands">
+...
+2019 Oct 02 16:54:58:189 GMT -4 P Info [$default.be.mt$.Thread.2] - [user] [inference-class_streams] #### Replenish Item: Pencil, Demand Quantity: 1820, Available Quantity: 300 
+2019 Oct 02 16:54:58:190 GMT -4 P Info [$default.be.mt$.Thread.3] - [user] [inference-class_streams] #### Replenish Item: NoteBook, Demand Quantity: 1020, Available Quantity: 100
+2019 Oct 02 16:54:58:270 GMT -4 P Info [$default.be.mt$.Thread.5] - [user] [inference-class_streams] #### Number of Orders By Customer: Customer=CUST_8, Count=15
+2019 Oct 02 16:54:58:838 GMT -4 P Info [$default.be.mt$.Thread.8] - [user] [inference-class_streams] #### Number of Orders By Customer: Customer=CUST_1, Count=22
+2019 Oct 02 16:54:59:191 GMT -4 P Info [$default.be.mt$.Thread.4] - [user] [inference-class_streams] #### Replenish Item: NoteBook, Demand Quantity: 1020, Available Quantity: 100 
+2019 Oct 02 16:55:28:279 GMT -4 P Info [$default.be.mt$.Thread.7] - [user] [inference-class_streams] #### Replenish Item: Pencil, Demand Quantity: 1880, Available Quantity: 300 
+...
+</pre>
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023. Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

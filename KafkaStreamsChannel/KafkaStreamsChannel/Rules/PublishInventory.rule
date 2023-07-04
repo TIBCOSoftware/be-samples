@@ -1,0 +1,25 @@
+/**
+ * @description Publish inventory snapshot.
+ */
+rule Rules.PublishInventory {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.PublishInventoryTimer t;
+	}
+	when {
+		
+	}
+	then {
+
+		Events.InventoryStatus notebookInvn = Events.InventoryStatus.InventoryStatus(null, null, "NoteBook", InventorySnapshot.NoteBookQty);
+		Event.sendEvent(notebookInvn);
+		System.debugOut(String.format("#### Published Inventory Item:%s, Available Quantity:%d", notebookInvn.item_name, notebookInvn.available_quantity));
+		
+		Events.InventoryStatus pencilInvn = Events.InventoryStatus.InventoryStatus(null, null, "Pencil", InventorySnapshot.PencilQty);
+		Event.sendEvent(pencilInvn);
+		System.debugOut(String.format("#### Published Inventory Item:%s, Available Quantity:%d", pencilInvn.item_name, pencilInvn.available_quantity));
+	}
+}

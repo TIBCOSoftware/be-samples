@@ -1,0 +1,21 @@
+/**
+ * @description 
+ * @author
+ */
+rule Rules.PublishReplenishment {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.ItemDemand e;
+	}
+	when {
+		e.demand_quantity > e.available_quantity;
+	}
+	then {
+		System.debugOut(String.format("#### Replenish Item: %s, Demand Quantity: %d, Available Quantity: %d ", e.item_name, e.demand_quantity, e.available_quantity));
+		Events.ReplenishInventory replen = Events.ReplenishInventory.ReplenishInventory(null, null, e.item_name, e.demand_quantity);
+		Event.sendEvent(replen);
+	}
+}
