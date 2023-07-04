@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="BaseDataResponseEvent" description="" GUID="5F6E12A4-66DA-5CF7-9A49-C132F3105D28" ownerProjectName="pattern_server" superEventPath="" ttlUnits="Seconds">
-  <extendedProperties/>
-  <expiryAction ownerProjectName="pattern_server" actionText="" conditionText="">
-    <symbols>
-      <symbolList idName="basedataresponseevent" type="/Events/BaseDataResponseEvent"/>
-    </symbols>
-  </expiryAction>
-</event:SimpleEvent>
