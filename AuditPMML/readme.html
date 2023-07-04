@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     AuditPMML - TIBCO BusinessEvents&reg; Examples</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../../_resources/examples.css";</style>
+<script type="text/javascript" src="../../../_resources/examples.js" /></script>
+<script type="text/javascript">
+function buildForms() {
+ var form;
+
+ SendEventForm.setServer("http://localhost:8308");
+
+ form = SendEventForm.get("clientDataForm");
+ form.setDestinationPath("/Channels/HTTP/ClientData");
+ form.setEventPath("/Events/ClientData");
+ form.addProperty("Age", "20");
+ form.addProperty("Employment", "Private");
+ form.addProperty("Education", "College");
+ form.addProperty("Marital", "Unmarried");
+ form.addProperty("Occupation", "Service");
+ form.addProperty("Income", "81838");
+ form.addProperty("Gender", "Female");
+ form.addProperty("Deductions", "0");
+ form.addProperty("Hours", "72");
+ form.build();
+
+
+ form = SendEventForm.get("loadDataForm");
+ form.setDestinationPath("/Channels/HTTP/LoadBulkData");
+ form.setEventPath("/Events/LoadBulkData");
+ form.build();
+
+
+}
+</script>
+</head>
+<body onLoad="buildForms()">
+
+
+<h1>PMML Audit Example</h1>
+
+<h2>Purpose of This Example</h2>
+
+<p>This example demonstrates how PMML functions can be invoked in TIBCO BusinessEvents&reg;. You can examine the project in TIBCO BusinessEvents Studio to understand the setup. The scenario uses an audit data dataset from the PMML examples at <a href="http://dmg.org/pmml/pmml_examples/index.html#Audit"> http://dmg.org/pmml/pmml_examples/index.html#Audit</a>
+
+</p>
+
+<h2>How to Run the Example</h2>
+
+<ol>
+<li>
+<p>Open a command window and at the command prompt, start the TIBCO BusinessEvents engine using the following command. Substitute your actual value for <i>BE_HOME</i>.</p>
+
+<pre class="commands">
+cd <i>BE_HOME</i>/examples/standard/Analytics/AuditPMML
+<i>BE_HOME</i>/bin/be-engine --propFile <i>BE_HOME</i>/bin/be-engine.tra -u default -c AuditPMML/Deployments/pmml.cdd AuditPMML.ear
+</pre>
+<p>Adapt these commands as needed, for example, if you have customized the example project, or are running it from a different directory. </p>
+<li>
+<p>Create a fictional client using the following form and click send. Change the values and repeat this step to send multiple events, as desired.</p>
+
+<form id="clientDataForm"></form>
+
+<p>In the command window you will see the predicted output from the model:
+<br><span class="logs">Target=0, Age=20, Employment=Private, Education=College, Marital=Unmarried, Occupation=Service, Income=81838.0, Gender=Female, Deductions=0.0, Hours=72</span><br></p>
+</li>
+
+<li>
+<p>If you want to predict the target field for all the data in the Audit.csv file, send the following event. The output is written to out.csv with the predicted target value.</p>
+
+<form id="loadDataForm"></form>
+</ol>
+<p>If you want to predict the target field for all the data in the Audit.csv file, send the following event. The output is written to out.csv with the predicted target value
+    <br><span class="logs">Output is written to the CSV file BE_HOME/examples/standard/Analytics/AuditPMML/resources/out.csv</span>
+</p>
+</li>
+
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023. Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

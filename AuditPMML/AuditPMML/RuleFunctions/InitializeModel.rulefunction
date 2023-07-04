@@ -1,0 +1,21 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.InitializeModel {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		System.debugOut("#### Loading the Audit pmml model");
+		String BE_HOME = System.getSystemPropertyAsString("tibco.env.BE_HOME", "");
+		String model = BE_HOME+"/examples/standard/Analytics/AuditPMML/resources/single_audit_dectree.xml";
+		Analytics.PMML.loadModel("modelAudit",model);
+		
+		//inialize the variables
+		AuditConstants.rowCount = 0;
+		AuditConstants.isBulkData = false;
+	}
+}

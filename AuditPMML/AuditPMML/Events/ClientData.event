@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="ClientData" description="" GUID="58D87B6A-8F15-078E-FB4A-E4FAE303B73E" ownerProjectName="AuditPMML" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="ClientData">
+  <properties name="Age" ownerProjectName="AuditPMML" type="int" ownerPath="/Events/ClientData"/>
+  <properties name="Employment" ownerProjectName="AuditPMML" ownerPath="/Events/ClientData"/>
+  <properties name="Education" ownerProjectName="AuditPMML" ownerPath="/Events/ClientData"/>
+  <properties name="Marital" ownerProjectName="AuditPMML" ownerPath="/Events/ClientData"/>
+  <properties name="Occupation" ownerProjectName="AuditPMML" ownerPath="/Events/ClientData"/>
+  <properties name="Income" ownerProjectName="AuditPMML" type="double" ownerPath="/Events/ClientData"/>
+  <properties name="Gender" ownerProjectName="AuditPMML" ownerPath="/Events/ClientData"/>
+  <properties name="Deductions" ownerProjectName="AuditPMML" type="double" ownerPath="/Events/ClientData"/>
+  <properties name="Hours" ownerProjectName="AuditPMML" ownerPath="/Events/ClientData"/>
+  <expiryAction name="ClientData_expiryAction" ownerProjectName="AuditPMML" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="clientdata" type="/Events/ClientData"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

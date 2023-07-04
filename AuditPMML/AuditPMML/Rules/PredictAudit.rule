@@ -1,0 +1,71 @@
+/**
+ * @description 
+ * @author snannuri-MBP
+ */
+rule Rules.PredictAudit {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.ClientData data;
+	}
+	when {
+	}
+	then {
+		//Get the predicted output for the event
+		Object modelOutput = Analytics.PMML.evalModelwithEvent("modelAudit", data);
+		Object targetFieldValue = Collections.Map.get(modelOutput,"TARGET_Adjusted");
+		if(AuditConstants.isBulkData){
+			AuditConstants.rowCount += 1;
+			Object stringBuffer = createBuffer(50);
+			String.append(stringBuffer,data@extId);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,String.valueOfInt(data.Age));
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,data.Employment);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,data.Education);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,data.Marital);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,data.Occupation);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,String.valueOfDouble(data.Income));
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,data.Gender);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,String.valueOfDouble(data.Deductions));
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,data.Hours);
+			String.append(stringBuffer,",");
+			String.append(stringBuffer,targetFieldValue);
+			
+			Object results = Collections.List.getList("results");
+			
+			if(results !=null){
+				Collections.add(results,String.convertBufferToString(stringBuffer));
+			}
+			
+			if(AuditConstants.rowCount >=2000){
+				Event.assertEvent(Events.OnCompleteBulkData.OnCompleteBulkData(String.valueOfLong(System.ID.nextId("ocbd"))/*extId String */,""/*payload String */));
+			}
+			
+		}else{
+			
+			System.debugOut("Target=" + targetFieldValue+ ", " 
+			+ "Age=" + data.Age  + ", "
+			+ "Employment=" + data.Employment + ", "
+			+ "Education=" + data.Education + ", "
+			+ "Marital=" + data.Marital + ", "
+			+ "Occupation=" + data.Occupation + ", "
+			+ "Income=" + data.Income + ", "
+			+ "Gender=" + data.Gender + ", " 
+			+ "Deductions=" + data.Deductions + ", " 
+			+ "Hours=" + data.Hours 
+			);
+		}
+		
+		Event.consumeEvent(data);
+	}
+}

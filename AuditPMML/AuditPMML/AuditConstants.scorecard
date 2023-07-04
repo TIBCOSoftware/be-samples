@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Scorecard xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/" folder="/" name="AuditConstants" description="" GUID="089190CC-FDC3-BC46-B967-51D29651AE03" ownerProjectName="AuditPMML" scorecard="true">
+  <properties name="rowCount" ownerProjectName="AuditPMML" type="int" ownerPath="/AuditConstants"/>
+  <properties name="isBulkData" ownerProjectName="AuditPMML" type="boolean" ownerPath="/AuditConstants"/>
+</element:Scorecard>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="LoadBulkData" description="" GUID="5F8E9037-610B-2FC4-10C9-95C3A2B4A184" ownerProjectName="AuditPMML" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="LoadBulkData">
+  <expiryAction folder="/Events/LoadBulkData" name="LoadData_expiryAction" ownerProjectName="AuditPMML" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="loaddata" type="/Events/LoadBulkData"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

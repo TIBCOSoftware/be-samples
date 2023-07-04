@@ -1,0 +1,72 @@
+/**
+ * @description 
+ * @author snannuri-MBP
+ */
+rule Rules.LoadBulkData {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.LoadBulkData data;
+	}
+	when {
+		
+	}
+	then {
+		String BE_HOME = System.getSystemPropertyAsString("tibco.env.BE_HOME", "");
+		String fileName = BE_HOME+"/examples/standard/Analytics/AuditPMML/resources/Audit.csv";
+		Object fileHandle = File.openFile(fileName, "r");
+		
+		AuditConstants.isBulkData = true;
+		Object results= Collections.List.createArrayListWithId("results");
+		
+		String currentLine = null;
+		boolean firstRow = true;
+		//currentLine = File.fileReadLine(fileHandle);
+		while (true) {
+			currentLine = File.fileReadLine(fileHandle);
+			if(currentLine == null){
+				break;
+			}
+			if(firstRow){
+				firstRow = false;
+				continue;
+			}
+			
+			String[] strArr = String.split(currentLine,",");
+			int index = 0;
+			
+			String ID = strArr[index]; index++;
+			int Age = Number.intValue(strArr[index],10) ;index++;
+			String Employment = strArr[index]; index++;
+			String Education = strArr[index]; index++;
+			String Marital = strArr[index]; index++;
+			String Occupation = strArr[index]; index++;
+			Double Income = Number.doubleValue(strArr[index]); index++;
+			String Gender = strArr[index]; index++;
+			Double Deductions = Number.doubleValue(strArr[index]); index++;
+			String Hours = strArr[index]; index++;
+			
+			Events.ClientData event = Events.ClientData.ClientData(
+														ID /*extId String */,
+														""/*payload String */, 
+														Age/*Age int */,
+														Employment/*Employment String */,
+														Education/*Education String */,
+														Marital/*Marital String */,
+														Occupation/*Occupation String */,
+														Income/*Income double */,
+														Gender/*Gender String */,
+														Deductions/*Deductions double */,
+														Hours/*Hours String */);
+			
+			Event.assertEvent(event);
+		}
+		
+		//close file and consume the event
+		File.fileClose(fileHandle);
+		Event.consumeEvent(data);
+
+	}
+}

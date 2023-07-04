@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="OnCompleteBulkData" description="" GUID="7CA4F46A-7D2C-60D4-E8CD-C8EEFB5D9C0F" ownerProjectName="AuditPMML" superEventPath="" ttlUnits="Seconds">
+  <expiryAction name="OnCompleteBulkData_expiryAction" ownerProjectName="AuditPMML" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="oncompletebulkdata" type="/Events/OnCompleteBulkData"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

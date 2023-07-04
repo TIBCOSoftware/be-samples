@@ -1,0 +1,50 @@
+/**
+ * @description 
+ * @author snannuri-MBP
+ */
+rule Rules.OnCompleteBulkData {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.OnCompleteBulkData bulkData;
+	}
+	when {
+		
+	}
+	then {
+		//reset the variables
+		AuditConstants.rowCount = 0;
+		AuditConstants.isBulkData = false;
+		
+		String BE_HOME = System.getSystemPropertyAsString("tibco.env.BE_HOME", "");
+		String fileName = BE_HOME+"/examples/standard/Analytics/AuditPMML/resources/out.csv";
+		Object fileHandle = File.openFile(fileName, "rw");
+		
+		Object inputFileds = Analytics.PMML.getInputFields("modelAudit");
+		Object headerBuffer = createBuffer(50);
+		String.append(headerBuffer,"ID");
+		for(int i=0; i< Collections.size(inputFileds);i++){
+			String.append(headerBuffer,",");
+			String.append(headerBuffer,Collections.List.get(inputFileds,i));
+		}
+		String.append(headerBuffer,",");
+		String.append(headerBuffer,"Target");
+		File.fileWriteLine(fileHandle,String.convertBufferToString(headerBuffer));
+		
+		Object results = Collections.List.getList("results");
+		if(results !=null){
+			Object iterator = Collections.iterator(results);
+			while(Collections.Iterator.hasNext(iterator)){
+				File.fileWriteLine(fileHandle,Collections.Iterator.next(iterator));
+			}
+		}
+		//close resources
+		File.fileClose(fileHandle);
+		Collections.List.deleteList("results");
+		System.debugOut("Output is written to the CSV file BE_HOME/examples/standard/Analytics/AuditPMML/resources/out.csv");
+		
+		Event.consumeEvent(bulkData);
+	}
+}
