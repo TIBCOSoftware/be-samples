@@ -1,0 +1,19 @@
+/**
+ * @description 
+ */
+Events.BaseDataResponseEvent rulefunction RuleFunctions.CreateDataResponse {
+	attribute {
+		validity = ACTION;
+	}
+	scope {		
+		Events.BaseDataRequestEvent requestevent;
+		String message;
+	}
+	body {
+		System.debugOut("Request [" + requestevent + "], generated response [" + message + "]");
+
+		String s = "<response>" + message + "</response>";
+				
+		return Events.BaseDataResponseEvent.BaseDataResponseEvent(null, s);
+	}
+}

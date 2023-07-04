@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/CallSim/" folder="/Events/CallSim/" name="CallDropped" description="" GUID="EEF2135F-55AC-9AD4-F555-D5550BAD0F85" ownerProjectName="pattern_server" superEventPath="/Events/BaseDataRequestEvent" ttlUnits="Seconds">
+  <extendedProperties/>
+  <properties name="phNumber" ownerProjectName="pattern_server" ownerPath="/Events/CallSim/CallDropped"/>
+  <expiryAction folder="/Events/CallSim/CallDropped" ownerProjectName="pattern_server" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="calldropped" type="/Events/CallSim/CallDropped"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

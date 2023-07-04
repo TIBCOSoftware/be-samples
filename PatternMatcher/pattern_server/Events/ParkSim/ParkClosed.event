@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/ParkSim/" folder="/Events/ParkSim/" name="ParkClosed" description="" GUID="4EDB7EF3-0039-0E6A-2F9A-E124E970D550" ownerProjectName="pattern_server" superEventPath="/Events/BaseDataRequestEvent" ttlUnits="Seconds">
+  <extendedProperties/>
+  <properties name="areaId" ownerProjectName="pattern_server" ownerPath="/Events/ParkSim/ParkClosed"/>
+  <expiryAction ownerProjectName="pattern_server" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="parkclosed" type="/Events/ParkSim/ParkClosed"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

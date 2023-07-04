@@ -1,0 +1,130 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Controller {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.ControlRequestEvent controlevent;
+		
+	}
+	body {
+		try{
+			System.debugOut("Request action [" + controlevent.action + "], data [" + controlevent.data + "]");
+			
+			//-----------------
+			
+			if(controlevent.action == "start epl service"){
+				Pattern.Service.start();
+				
+				ControlResponseEvent response = CreateControlResponse(controlevent, ToSuccessXML("Success", false));			
+				Event.replyEvent(controlevent, response);			
+			}
+			else if(controlevent.action == "stop epl service"){
+				Pattern.Service.stop();
+				
+				ControlResponseEvent response = CreateControlResponse(controlevent, ToSuccessXML("Success", false));			
+				Event.replyEvent(controlevent, response);			
+			}
+			
+			//-----------------
+			
+			else if(controlevent.action == "register pattern"){
+				if(controlevent.data != ""){
+					String patternString = XPath.execute("/register/pattern/text()", controlevent.data, null);			
+			
+					String patternURI = Pattern.Manager.register(patternString);
+	
+					String xml = "<pattern-uri>" + patternURI + "</pattern-uri>";
+					xml = ToSuccessXML(xml, false);
+					
+					ControlResponseEvent response = CreateControlResponse(controlevent, xml);	
+					Event.replyEvent(controlevent, response);
+				}
+				else{
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToErrorXML("Data not provided", null));			
+					Event.replyEvent(controlevent, response);
+				}
+			}
+			else if(controlevent.action == "list patterns"){
+				String[] patternURIs = Pattern.Manager.getRegistered();
+	
+				String xml = "";
+				for(int i = 0; i < patternURIs@length; i = i + 1){
+					xml = xml + "<pattern-uri>" + patternURIs[i] + "</pattern-uri>";
+				}				
+				xml = ToSuccessXML(xml, false);
+				
+				ControlResponseEvent response = CreateControlResponse(controlevent, xml);			
+				Event.replyEvent(controlevent, response);
+			}
+			else if(controlevent.action == "unregister pattern"){
+				if(controlevent.data != ""){
+					String patternURI = XPath.execute("/unregister/pattern-uri/text()", controlevent.data, null);
+					
+					Pattern.Manager.unregister(patternURI);
+					
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToSuccessXML("Success", false));			
+					Event.replyEvent(controlevent, response);
+				}
+				else{
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToErrorXML("Data not provided", null));			
+					Event.replyEvent(controlevent, response);
+				}				
+			}
+			
+			//-----------------
+			
+			else if(controlevent.action == "deploy pattern"){
+				if(controlevent.data != ""){
+					String patternURI = XPath.execute("/deploy/pattern-uri/text()", controlevent.data, null);
+					String closure = XPath.execute("/deploy/pattern-closure/text()", controlevent.data, null);
+					String patternInstanceName = XPath.execute("/deploy/pattern-instance-name/text()", controlevent.data, null);			
+							
+					Object patternInstance = Pattern.Manager.instantiate(patternURI);
+					Pattern.Manager.setClosure(patternInstance, closure);
+					Pattern.Manager.setCompletionListener(patternInstance, "/RuleFunctions/PatternResultSuccessHandler");
+					Pattern.Manager.setFailureListener(patternInstance, "/RuleFunctions/PatternResultFailureHandler");
+					Pattern.Manager.deploy(patternInstance, patternInstanceName);
+					
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToSuccessXML("Success", false));			
+					Event.replyEvent(controlevent, response);
+				}else{
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToErrorXML("Data not provided", null));			
+					Event.replyEvent(controlevent, response);
+				}				
+			}			
+			else if(controlevent.action == "undeploy pattern"){
+				if(controlevent.data != ""){
+					String patternInstanceName = XPath.execute("/undeploy/pattern-instance-name/text()", controlevent.data, null);			
+							
+					Pattern.Manager.undeploy(patternInstanceName);
+					
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToSuccessXML("Success", false));			
+					Event.replyEvent(controlevent, response);				
+				}else{
+					ControlResponseEvent response = CreateControlResponse(controlevent, ToErrorXML("Data not provided", null));			
+					Event.replyEvent(controlevent, response);
+				}				
+			}
+
+			//-----------------
+			
+			//Just a ping.			
+			else{
+				ControlResponseEvent response = CreateControlResponse(controlevent, ToSuccessXML("Success", false));			
+				Event.replyEvent(controlevent, response);
+			}
+		}
+		catch(Exception e){
+			String xml = ToErrorXML(null, e);
+			
+			ControlResponseEvent response = CreateControlResponse(controlevent, xml);			
+			Event.replyEvent(controlevent, response);
+		}
+		
+		Event.consumeEvent(controlevent);
+	}	
+}
