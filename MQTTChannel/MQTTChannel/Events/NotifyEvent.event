@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="NotifyEvent" description="Event to notify temperature set" GUID="07320EFB-A5D5-D868-3BA7-7583E798EC12" ownerProjectName="MQTTChannel" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/MqttChannel" destinationName="Mqtt_Dest">
+  <properties name="message" ownerProjectName="MQTTChannel" ownerPath="/Events/NotifyEvent"/>
+  <expiryAction folder="/Events/NotifyEvent" name="NotifyEvent_expiryAction" ownerProjectName="MQTTChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="notifyevent" type="/Events/NotifyEvent"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

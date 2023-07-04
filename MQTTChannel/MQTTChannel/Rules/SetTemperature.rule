@@ -1,0 +1,29 @@
+/**
+ * @description sets room temperature
+ * @author
+ */
+rule Rules.SetTemperature {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.SetTemperature temperature;
+		
+	}
+	when {
+		
+	}
+	then {
+		System.debugOut("############### SetTemperature rule triggered ###############");
+		
+		System.debugOut("Setting floor temperature and notifying");
+		
+		
+		Events.NotifyEvent notifyEvent = Events.NotifyEvent.NotifyEvent("", null, "Temperature set");
+		
+		Event.sendEvent(notifyEvent);
+		
+		System.debugOut("############### SetTemperature rule complete ###############");
+	}
+}

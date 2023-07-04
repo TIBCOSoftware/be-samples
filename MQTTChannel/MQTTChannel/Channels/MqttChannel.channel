@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="MqttChannel" description="" GUID="AE9C3E81-12C8-0443-47DB-2F950070AAB1" ownerProjectName="MQTTChannel">
+  <driver configMethod="REFERENCE" reference="/SharedResources/mqttconn.sharedmqttcon" label="MQTT" channel="/">
+    <properties>
+      <properties xsi:type="designtime:SimpleProperty" name="mqtt.broker.urls" value="%%mqtt.channel/brokerUrl%%" mandatory="true"/>
+      <properties xsi:type="designtime:SimpleProperty" name="UserName" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="Password" value=""/>
+    </properties>
+    <destinations name="Mqtt_Dest" description="" GUID="F6AC1AC7-766C-986A-4A72-3B5D617B18B5" ownerProjectName="MQTTChannel" eventURI="/Events/SetTemperature" serializerDeserializerClass="com.tibco.cep.driver.mqtt.serializer.MqttMapSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="publish.topic.name" value="/notify" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="subscribe.topic.name" value="/building/firstfloor/#" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="clientId" value="%%clientId1%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="cleanSession" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="asynsClient" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="maxInflight" value="10" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="qos" value="1"/>
+        <properties xsi:type="designtime:SimpleProperty" name="retain" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="willAndTestament" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="disconnectOnSuspend" value="false"/>
+      </properties>
+    </destinations>
+    <destinations name="Dest_Read_Notify" description="" GUID="FFE97F4D-2232-FF42-2B7B-069337288C15" ownerProjectName="MQTTChannel" eventURI="/Events/NotifyEvent" serializerDeserializerClass="com.tibco.cep.driver.mqtt.serializer.MqttMapSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="publish.topic.name" value="/" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="subscribe.topic.name" value="/notify" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="clientId" value="%%clientId2%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="cleanSession" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="asynsClient" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="maxInflight" value="10" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="qos" value="1"/>
+        <properties xsi:type="designtime:SimpleProperty" name="retain" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="willAndTestament" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="disconnectOnSuspend" value="false"/>
+      </properties>
+    </destinations>
+    <destinations name="Mqtt_Dest_Request" description="" GUID="F6AC1AC7-766C-986A-4A72-3B5D617B18B5" ownerProjectName="MQTTChannel" eventURI="/Events/SetTemperatureRequest" serializerDeserializerClass="com.tibco.cep.driver.mqtt.serializer.MqttMapSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="publish.topic.name" value="/#" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="subscribe.topic.name" value="/building/secondfloor/#" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="clientId" value="%%clientId3%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="cleanSession" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="asynsClient" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="maxInflight" value="10" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="qos" value="1"/>
+        <properties xsi:type="designtime:SimpleProperty" name="retain" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="willAndTestament" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="disconnectOnSuspend" value="false"/>
+      </properties>
+    </destinations>
+    <destinations name="Mqtt_Dest_Reply" description="" GUID="F6AC1AC7-766C-986A-4A72-3B5D617B18B5" ownerProjectName="MQTTChannel" eventURI="/Events/SetTemperatureRequest" serializerDeserializerClass="com.tibco.cep.driver.mqtt.serializer.MqttMapSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="publish.topic.name" value="/notifyreply" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="subscribe.topic.name" value="/notifyreply" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="clientId" value="%%clientId4%%" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="cleanSession" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="asynsClient" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="maxInflight" value="10" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="qos" value="1"/>
+        <properties xsi:type="designtime:SimpleProperty" name="retain" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="willAndTestament" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="disconnectOnSuspend" value="false"/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="MQTT"/>
+  </driver>
+</channel:Channel>

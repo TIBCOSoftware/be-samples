@@ -1,0 +1,23 @@
+/**
+ * @description 
+ * @author ssinghal-ThinkPad-W520
+ */
+rule Rules.ReceiveNotify {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.NotifyEvent ne;
+	}
+	when {
+		
+	}
+	then {
+		System.debugOut("############### ReceiveNotify rule triggered ###############");
+		
+		System.debugOut("Received message is - " + ne.message);
+		
+		System.debugOut("############### ReceiveNotify rule complete ###############");
+	}
+}

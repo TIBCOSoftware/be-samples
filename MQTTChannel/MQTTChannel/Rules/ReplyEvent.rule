@@ -1,0 +1,27 @@
+/**
+ * @description sets room temperature
+ * @author
+ */
+rule Rules.ReplyEvent {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.SetTemperatureRequest temperature;
+	}
+	when {
+		
+	}
+	then {
+		System.debugOut("############### ReplyEvent rule triggered ###############");
+		
+		System.debugOut("Setting floor temperature and replying");
+		
+		Events.NotifyEvent notifyEvent = Events.NotifyEvent.NotifyEvent("", "", "Temperature set in reply event rule");
+		
+		Event.replyEvent(temperature, notifyEvent);
+		
+		System.debugOut("############### ReplyEvent rule complete ###############");
+	}
+}

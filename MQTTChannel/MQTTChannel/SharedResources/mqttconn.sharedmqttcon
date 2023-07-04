@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<MqttSharedResource>
+    <config>
+        <Description/>
+        <mqtt.broker.urls>%%mqtt.channel/brokerUrl%%</mqtt.broker.urls>
+        <UserName/>
+        <Password/>
+        <useSsl>false</useSsl>
+        <ssl xmlns="http://www.tibco.com/xmlns/aemeta/services/2002">
+            <cert isRef="true"></cert>
+            <identity isRef="true"></identity>
+            <trustStorePassword></trustStorePassword>
+            <requiresClientAuthentication>false</requiresClientAuthentication>
+        </ssl>
+    </config>
+</MqttSharedResource>

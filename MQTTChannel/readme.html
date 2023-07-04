@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     MQTT Channel
+
+- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../_resources/examples.css";</style>
+</head>
+<body onLoad="buildForms()">
+
+<h1><span lang=EN-US style='mso-fareast-font-family:"Times New Roman"'>MQTT Channel<o:p></o:p></span></h1>
+<h2>Purpose of This Example</h2>
+
+<p>The MQTTChannel example demonstrates how TIBCO BusinessEvents&reg; uses the MQTT channel to send and receive events using MQTT. You can examine the project in TIBCO BusinessEvents Studio to understand the setup, and refer to <i>TIBCO BusinessEvents Developer's Guide</i> for details on channel configuration. </p>
+
+<h2>About the project</h2>
+	
+<p>Consider a building where there are many floors, and temperature can be set for various floors and rooms. Here we have tried to demonstrate how each floor's temperature can be set.</p>
+
+<p>An external event(say via a mobile device) publishes the set temperature event for first floor. A MQTT destination subscribing to first floor receives event message, sets temperature and notifies back.</p>
+
+<p>A similar kind of events demonstration has been done to set second floor temperature, but this time catalog function Event.requestEvent and Event.replyEvent has been demonstrated.</p>
+
+
+<h3>Running the project</h3>
+
+<ol>
+
+<li><p>Make sure that MQTT Server is running locally with broker url <code>tcp://localhost:1883</code>.</p>
+</li>
+
+<li><p>Open a command window. Start a client agent instance.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u client -c MQTTChannel\mqtt.cdd MqttChannel.ear
+</pre>
+</li>
+	
+<li><p>Open another command window and run TemperaturePublisher.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel 
+javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher firstfloor
+</pre>	
+<p>Note : The default broker url used here is tcp://localhost:1883. If some other broker url needs to be used, it can be given as second command line arg.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel 
+javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher firstfloor brokerUrl
+</pre>
+</li>
+
+
+
+</ol>
+
+<h3>Output</h3>
+
+<h4>Sample output from the client agent</h4>
+<pre class="commands">
+...
+2018 Jun 28 16:26:53:953 GMT +5 c2 Info [$default.be.mt$.Thread.9] - [user] [inference-class-client] ############### SetTemperature rule triggered ###############
+2018 Jun 28 16:26:53:953 GMT +5 c2 Info [$default.be.mt$.Thread.9] - [user] [inference-class-client] Setting floor temperature and notifying
+2018 Jun 28 16:26:53:955 GMT +5 c2 Info [$default.be.mt$.Thread.9] - [user] [inference-class-client] ############### SetTemperature rule complete ###############
+2018 Jun 28 16:26:53:998 GMT +5 c2 Info [$default.be.mt$.Thread.10] - [user] [inference-class-client] ############### ReceiveNotify rule triggered ###############
+2018 Jun 28 16:26:53:999 GMT +5 c2 Info [$default.be.mt$.Thread.10] - [user] [inference-class-client] Received message is - Temperature set
+2018 Jun 28 16:26:53:999 GMT +5 c2 Info [$default.be.mt$.Thread.10] - [user] [inference-class-client] ############### ReceiveNotify rule complete ###############
+...
+</pre>
+	
+	
+	
+<h3>Running the project to demonstrate requestEvent and replyEvent </h3>
+
+<ol>
+
+<li><p>Make sure that MQTT Server is running locally with broker url <code>tcp://localhost:1883</code>.</p>
+</li>
+
+<li><p>Open a command window. Start a client agent instance.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u client -c MQTTChannel\mqtt.cdd MqttChannel.ear
+</pre>
+</li>
+	
+<li><p>Open a command window. Start a server agent instance.</p>
+<p>Since Client Id should be unique accross all clients connecting to same MQTT broker. Provide a property file for new GV values.</p>
+	
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u server -c MQTTChannel\mqtt.cdd  -p client.properties MqttChannel.ear
+</pre>
+</li>
+	
+<li><p>Open another command window and run TemperaturePublisher.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel 
+javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher secondfloor
+</pre>	
+<p>Note : The default broker url used here is tcp://localhost:1883. If some other broker url needs to be used, it can be given as second command line arg.</p>
+<pre class="commands">
+cd BE_HOME/examples/standard/MQTTChannel 
+javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher secondfloor brokerUrl
+</pre>
+
+	
+</li>
+
+
+
+</ol>
+
+<h3>Output</h3>
+
+<h4>Sample output from the client agent</h4>
+<pre class="commands">
+...
+2018 Jun 28 16:40:28:816 GMT +5 c2 Info [$default.be.mt$.Thread.1] - [user] [inference-class-client] ############### RequestEvent rule triggered ###############
+2018 Jun 28 16:40:28:816 GMT +5 c2 Info [$default.be.mt$.Thread.1] - [user] [inference-class-client] Requesting Event
+2018 Jun 28 16:40:28:863 GMT +5 c2 Info [$default.be.mt$.Thread.1] - [user] [inference-class-client] Temperature set in reply event rule
+2018 Jun 28 16:40:28:863 GMT +5 c2 Info [$default.be.mt$.Thread.1] - [user] [inference-class-client] ############### RequestEvent rule complete ###############
+...
+</pre>
+	
+<h4>Sample output from the server agent</h4>
+<pre class="commands">
+...
+2018 Jun 28 16:40:28:828 GMT +5 s1 Info [$default.be.mt$.Thread.1] - [user] [inference-class-server] ############### ReplyEvent rule triggered ###############
+2018 Jun 28 16:40:28:833 GMT +5 s1 Info [$default.be.mt$.Thread.1] - [user] [inference-class-client] Setting floor temperature and replying
+2018 Jun 28 16:40:28:839 GMT +5 s1 Info [$default.be.mt$.Thread.1] - [user] [inference-class-server] ############### ReplyEvent rule complete ###############
+...
+</pre>
+
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023. Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

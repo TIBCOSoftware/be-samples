@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="SetTemperature" description="Sets Room Temperature" GUID="0385A812-B63D-E11D-0AED-9E6BA9A59AF6" ownerProjectName="MQTTChannel" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/MqttChannel" destinationName="Mqtt_Dest">
+  <properties name="temperature" ownerProjectName="MQTTChannel" type="int" ownerPath="/Events/SetTemperature"/>
+  <expiryAction folder="/Events/SetTemperature" name="SetTemperature_expiryAction" ownerProjectName="MQTTChannel" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="settemperature" type="/Events/SetTemperature"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

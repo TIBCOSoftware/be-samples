@@ -1,0 +1,26 @@
+/**
+ * @description sets room temperature
+ * @author
+ */
+rule Rules.RequestEvent {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.SetTemperatureRequest temperature;
+	}
+	when {
+		
+	}
+	then {
+		System.debugOut("############### RequestEvent rule triggered ###############");
+		
+		System.debugOut("Requesting Event");
+		
+		Events.NotifyEvent response = Event.requestEvent(temperature, "/Events/NotifyEvent", "/Channels/MqttChannel/Mqtt_Dest_Reply", 5000, null);
+		
+		System.debugOut(response.message);
+		System.debugOut("############### RequestEvent rule complete ###############" );
+	}
+}
