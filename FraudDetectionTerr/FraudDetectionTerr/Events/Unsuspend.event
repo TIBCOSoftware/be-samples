@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" namespace="/Events/" folder="/Events/" name="Unsuspend" description="" GUID="983A6A29-A9D6-CE91-C996-4F359DA0B993" ownerProjectName="FraudDetectionTerr" superEventPath="/Events/AccountOperations" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="AllOps">
+  <extendedProperties/>
+  <expiryAction name="Restore_expiryAction" ownerProjectName="FraudDetectionTerr" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="restore" type="/Events/Unsuspend"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

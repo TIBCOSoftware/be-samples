@@ -1,0 +1,59 @@
+/**
+ * @description 
+ * @author syara-dt
+ */
+rule Rules.FraudDetection {
+	attribute {
+		priority = 2;
+		forwardChain = true;
+	}
+	declare {
+		
+		Events.Debit debit;
+		Concepts.Account account;
+	}
+	when {
+		account@extId == debit.AccountId;
+		account.Status != "Suspended";
+	}
+	then {
+		try
+			{	
+				int totalHisValues = Instance.PropertyAtom.numHistoryValues(account.Debits);			
+				double averageMonthlyBalance = account.AvgMonthlyBalance;		
+				long[] debitTime = long[totalHisValues]{};
+				double[] debitAmount = double[totalHisValues]{};			
+				int i;								
+				for(i=0; i<totalHisValues; i++)
+				{
+					debitTime[i]=Instance.PropertyAtom.getHistoryTime(account.Debits,i);
+					debitAmount[i]=Instance.PropertyAtom.getDoubleHistoryValue(account.Debits,i);		
+				}	 
+				Object[] TerrResult = Analytics.TERR.Engine.invokeTERRFunction("myPool","FraudDetection",debitTime,debitAmount,averageMonthlyBalance);					
+				int fdScore = TerrResult[0];
+				if(fdScore==1)
+				{
+					  	account.Status = "Suspended";
+						System.debugOut("#### Account ID " + account@extId + " STATUS set to Suspended. Fraud suspected.");
+			  	}
+				else if(fdScore == 0)
+			 	{	
+			  		
+			  		; // No fraud detected
+			  	}
+			  	else
+			  	{
+			  		; // Terr NA
+			  	}
+		   	 }			
+			 catch(Exception e)
+			 {
+				String terrError = Analytics.TERR.Engine.getLastErrorMessage("myPool");
+				if (terrError != "")
+					System.debugOut("#### Exception: " + terrError);
+				else	
+					System.debugOut("#### Exception: " + e@message);	
+			 }	
+			Event.consumeEvent(debit);
+	}
+}

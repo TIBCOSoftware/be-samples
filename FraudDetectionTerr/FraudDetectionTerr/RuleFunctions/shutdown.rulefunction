@@ -1,0 +1,15 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.shutdown {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		System.debugOut("#### Stopping the TERR Engine pool");
+		Analytics.TERR.Engine.stopEngine("myPool");
+	}
+}

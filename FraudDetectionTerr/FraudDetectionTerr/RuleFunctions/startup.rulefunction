@@ -1,0 +1,20 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.startup {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+			System.debugOut("#### Creating engine pool with 5 TERR Engine instances");
+			Analytics.TERR.Engine.createEnginePool(5,"myPool");
+			System.debugOut("#### Starting the engine pool");
+			Analytics.TERR.Engine.startEngine("myPool");
+			System.debugOut("#### Executing the script in the TERR Engine pool");
+			String rscript = Engine.loadResourceAsString("/TerrScript/FD.R","UTF-8");	
+		    Analytics.TERR.Engine.engineExecute("myPool",rscript,true);
+		}
+}
