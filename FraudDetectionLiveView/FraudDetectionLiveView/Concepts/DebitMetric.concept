@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="DebitMetric" description="" GUID="D56274B0-7CF2-E824-1AFF-1EC7E768D697" ownerProjectName="FraudDetectionLiveView" superConceptPath="" autoStartStateMachine="true">
+      
+    <extendedProperties/>
+      
+    <properties name="DebitDate" ownerProjectName="FraudDetectionLiveView" type="DateTime" ownerPath="/Concepts/DebitMetric"/>
+      
+    <properties name="Amount" ownerProjectName="FraudDetectionLiveView" type="double" ownerPath="/Concepts/DebitMetric"/>
+      
+    <properties name="AccountId" ownerProjectName="FraudDetectionLiveView" ownerPath="/Concepts/DebitMetric"/>
+    
+</element:Concept>

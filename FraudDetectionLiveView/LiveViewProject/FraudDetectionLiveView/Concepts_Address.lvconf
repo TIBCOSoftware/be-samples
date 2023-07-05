@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liveview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.streambase.com/schemas/lvconf/">
+<data-table id="Concepts_Address">
+<fields>
+<field name="City" type="string"/>
+<field name="State" type="string"/>
+<field name="extId" type="string"/>
+<field name="version__" type="int"/>
+<field name="typeId__" type="int"/>
+<field name="deleted__" type="bool"/>
+<field name="rrf__" type="string"/>
+</fields>
+<primary-key>
+<field ref="extId"/>
+</primary-key>
+</data-table>
+</liveview-configuration>

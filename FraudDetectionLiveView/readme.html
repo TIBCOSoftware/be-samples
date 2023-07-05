@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>     Fraud Detection LiveView
+
+- TIBCO BusinessEvents&reg; Examples
+</title>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<link rel="Shortcut Icon" href="../../_resources/icon.gif" type="image/gif" />
+<style type="text/css" media="all">@import "../../_resources/examples.css";</style>
+<script type="text/javascript" src="../../_resources/examples.js" /></script>
+<script type="text/javascript">
+function buildForms() {
+ var form;
+
+ SendEventForm.setServer("http://localhost:8109");
+
+
+ form = SendEventForm.get("createAccountForm");
+ form.setDestinationPath("/Channels/HTTP/AllOps");
+ form.setEventPath("/Events/CreateAccount");
+ form.addProperty("AccountId", "Bob");
+ form.addProperty("Balance", "20000");
+ form.addProperty("AvgMonthlyBalance", "11000");
+ form.addProperty("City", "Palo Alto");
+ form.addProperty("State", "CA");
+ form.build();
+
+
+ form = SendEventForm.get("debitAccountForm");
+ form.setDestinationPath("/Channels/HTTP/AllOps");
+ form.setEventPath("/Events/Debit");
+ form.addProperty("AccountId", "Bob");
+ form.addProperty("Amount", "2000");
+ form.build();
+
+ form = SendEventForm.get("unsuspendAccountForm");
+ form.setDestinationPath("/Channels/HTTP/AllOps");
+ form.setEventPath("/Events/Unsuspend");
+ form.addProperty("AccountId", "Bob");
+ form.build();
+
+
+}
+</script>
+</head>
+<body onLoad="buildForms()">
+
+
+<h1>Fraud Detection LiveView</h1>
+
+<h2>Purpose of This Example</h2>
+
+<p>This example builds on the Fraud Detection example. The Fraud Detection with LiveView example adds live monitoring, alerting and aggregation.
+Fraud Detection is a commonly used scenario for highlighting what's different about CEP because it shows how the CEP engine correlates different events using a time window or other criteria. In this example, fraud is suspected when the following occurs:</p>
+<ul>
+<li>The account incurs more than three debit transactions in a two minute period.</li>
+</ul>
+
+<p>Finally the account state is changed from Normal to Suspended in the following 2 situations,</p>
+<ul>
+<li><p>When 3 such Fraud Detection Attempts happen, the Account is moved to Suspended state</p></li>
+<li><p>Alternatively if the balance is negative, the account is suspended as well</p></li>
+</ul>
+
+<p><b>Note:</b> This example uses clustered deployment with cache object management. But with few modification listed below, users can run this example as unclustered deployment and preferred object management(in-memory or store).</p>
+<ul>
+	<ul>
+		<li>
+			<p>Replace all occurrences of Cluster.DataGrid.CacheLoadConceptByExtId function with Instance.getByExtId and build ear.</p>
+		</li>
+		<li>
+			<p>Change CDD cluster and object management configurations.</p>
+		</li>
+	</ul>
+</ul>
+
+<h2>Pre-requisites</h2>
+
+<p>Below are the list of pre-requisites before running this example:</p>
+<ul>
+	<li>
+		<p><b>For SB 7.x</b></p>
+		<ul>
+		<li><p>Install TIBCO Live Data Mart</p></li>
+		<li><p>Download Live View Web. Once downloaded, unzip the contents and look for lvweb.war within the root folder. There are 2 options to set Live View Web with StreamBase,</p></li>
+			<ul>
+				<li><p>Global - Create a folder namely lv-user-webapps under <i>STREAMBASE_HOME</i>/liveview/server. This will make Live View Web available to all LV projects run via this StreamBase installation.</p></li>
+				<li><p>Local - Create a folder namely lv-user-webapps under the generated project (<i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/FraudDetectionLiveView. This will make Live View Web available to only this project.</p></li>
+			</ul>
+		</ul>
+	</li>
+	<li>
+		<p><b>For SB 10.x</b></p>
+		<ul>
+			<li><p>Install TIBCO Streambase 10.x.</p></li>
+		</ul>
+	</li>
+	<p>These can be downloaded from TIBCO eDelivery.</p>
+</ul>
+<p><b>Note:</b> To run this sample prior TIBCO Streambase knowledge mainly Liveview Datamart knowledge is required. </p>
+
+<h2>How to Run the Example</h2>
+<ol>
+
+<li>
+<ul>
+<p>Start LiveView Server</p>
+<li>
+<p><b>For SB 7.x</b></p>
+<p><b>Linux/Mac:</b></p>
+<p>Open a command window and at the command prompt, run the LDM server with the generated LiveView project. Substitute your actual value for STREAMBASE_HOME</p>
+
+<pre class="commands">
+cd <i>SB_HOME</i>/bin
+lv-server run {generated project's path}
+</pre>
+
+<p>Alternatively you can setup SB environment, which sets up the STREAMBASE_HOME so you can run SB commands from anywhere. Adapt these commands as needed.</p>
+
+<p><b>Windows:</b></p>
+<p>Always run the command line version of StreamBase Server (sbd.exe) from a StreamBase Command Prompt invoked from the Windows Start menu, not from the standard Windows command prompt. The StreamBase Command Prompt has its environment and PATH preconfigured for running StreamBase and LiveView commands and utilities.</p>
+
+<p><b>Note:</b> The generated Liveview Project is already available as part of the examples @ <i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/FraudDetectionLiveView. You can use this or generate a new one and pass the project path to the above command while starting the server.</p>
+</li>
+<li>
+<p><b>For SB 10.x</b></p>
+<p><b>Linux/Mac:</b></p>
+<p>Set the JAVA_HOME and go to SB_HOME/distrib/tibco/bin (epadmin is present at this location) - This is the short form on running epadmin. For more formal way of setting please refer to <a href="https://docs.tibco.com/pub/str/10.6.0/doc/html/install/configure-shell.html">SB doc</a></p>
+<p><b>Windows:</b></p>
+<p>Always run the command line version of StreamBase Server (sbd.exe) from a StreamBase Command Prompt.</p>
+
+<p>Commands to execute,</p>
+<ul>
+<li>
+<p>Install the node</p>
+<pre class="commands">
+cd <i>SB_HOME</i>/distrib/tibco/bin
+epadmin install node nodename=A.fdlv-dep application={path to application.zip file} nodedirectory={path to a temporary directory for logs}
+</pre>
+<p><b>Note:</b></p><p>The application zip is already bundled as part of the examples @<i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/fdlv-dep-0.0.1-SNAPSHOT-ep-application.zip. This application zip is generated using StreamBase 10.4.4. If you are using a different version of StreamBase, use below steps to generate application zip.</p>
+<ul>
+<li>Open StreamBase Studio from SB_HOME.</li>
+<li>Create a new StreamBase Project and select type as "LiveView Fragment"</li>
+<li>Copy all lvconf files from @<i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/FraudDetectionLiveView to src/main/liveview directory of the new project.</li>
+<li>Copy LiveView.h2.db file from @<i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/FraudDetectionLiveView/lv-systemdata to src/main/liveview directory of the new project.</li>
+<li>Create a new StreamBase Project and select type as "StreamBase Application"</li>
+<li>Add Dependency - Right click on StreamBase Application project and select Maven > Add Dependency. Add LiveView Fragment project as dependency.</li>
+<li>Create StreamBase Application Archive - Right click on StreamBase Application project and select StreamBase > Create StreamBase Application Archive to create application zip.</li>
+<li>Use the application zip created under target directory of StreamBase Application project to install the node.</li>
+</ul>
+</li>
+<li>
+<p>Start the node</p>
+<pre class="commands">
+epadmin servicename=fdlv-dep start node
+</pre>
+</li>
+</ul>
+</li>
+<p>Check log files located @ {nodedirectory}/A.fdlv-dep/logs/*.log file) and look for "all tables loaded" command</p>
+</ul>
+<p>Once the server is up, hit the LiveView Web URL - <a href="http://localhost:10080/lvweb">http://localhost:10080/lvweb</a></p>
+<p><b>Note:</b></p><p>If LiveView Web does not load, check the port used by the started node using below command. If the port is different, use that port to open LiveView Web. Also, update the LDM Url in BE project and build the ear before next step.</p>
+<pre class="commands">
+epadmin display services --servicetype=liveview
+</pre>
+</li>
+
+<li>
+<p>Open a command window and at the command prompt, start the TIBCO BusinessEvents engine using the following command, to run the inference with cache storage. Substitute your actual value for <i>BE_HOME</i>.</p>
+
+<pre class="commands">
+cd <i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/FraudDetectionLiveView
+<i>BE_HOME</i>/bin/be-engine --propFile <i>BE_HOME</i>\bin\be-engine.tra -u default -c FraudDetectionLiveView/FraudDetectionLiveView.cdd FraudDetectionLiveView.ear
+</pre>
+
+<p>Adapt these commands as needed, for example, if you have customized the example project, or are running it from a different directory.</p>
+</li>
+
+<li>
+<p>Create an account and give it a balance and an average monthly balance. Enter a name in the Account ID field. Enter, for example, 20000 in the Balance, and 11000 in the AvgMonthlyBalance fields. Repeat this step to create multiple accounts, as desired.</p>
+
+<form id="createAccountForm"></form>
+
+<p>In the command window you see a message like these based on the input action:
+<table>
+<tr>
+<th>Action</th>
+<th>Message</th>
+</tr>
+<tr>
+<td>In the /Events/CreateAccount form, enter a new account name.</td>
+<td><pre class="logs">#### Created account Bob.</pre></td>
+</tr>
+<tr>
+<td>In the /Events/CreateAccount form, enter the same account name two times.</td>
+<td><pre class="logs">#### Account already exists: Bob</pre></td>
+</tr>
+</table>
+
+<p>In the Live View Web page you should see the charts change to reflect the creation of the account.</p>
+<image src="readmeimages/1.png"/>
+</li>
+
+
+<li>
+<p>Now debit the account. In the AccountId field, enter one of the account names you specified above. Enter the amount of the debit in the Amount field. Then click Send.</p>
+
+<form id="debitAccountForm"></form>
+
+<p>In the command window you see messages like this
+(the actual message depends on the account balance, the average monthly balance, and other events that happened in the two minute window):
+<p>Rules in the project react to various inputs depending on current facts in the Rete network. You can try the following.</p>
+
+<table>
+<tr>
+<th>Action</th>
+<th>Message</th>
+</tr>
+<tr>
+<td>In the /Events/Debit form, enter the debit amount less than the balance.</td>
+<td><pre class="logs">#### Debiting account Bob by $1000.0</pre></td>
+</tr>
+<tr>
+<td>In the /Events/Debit form, enter a debit amount greater than the account balance.</td>
+<td><pre class="logs">#### Account ID Bob STATUS set to Suspended. <br>Balance -1000.0 is less than zero</pre></td>
+</tr>
+<tr>
+<td>In the Events/Debit form, debit an account that was set to Suspended.</td>
+<td><pre class="logs">#### Cannot debit the suspended account Bob</pre></td>
+</tr>
+<tr>
+<td>In the Events/Debit form, match the fraud detection criteria to the following condition:
+<ul>
+<li>Make 3 debits within 2 minutes</li>
+</ul></td>
+<td><pre class="logs">#### Account ID Bob. Fraud suspected, Attempt [1]</pre></td>
+</tr>
+<tr>
+<td>3 such fraud detection will result in account being suspended seeing the following message:
+</td>
+<td><pre class="logs">#### Account ID Bob STATUS set to Suspended. Fraud detected.</pre></td>
+</tr>
+</table>
+
+<p>In the Live View Web page you should now see the charts change to reflect the debit,suspend,etc behavior.</p>
+<image src="readmeimages/2.png"/>
+</li>
+
+<li>
+<p>Finally, this is optional, to unsuspend the account. In the AccountId field, enter one of the account names you specified above. Then click Send.</p>
+
+<form id="unsuspendAccountForm"></form>
+
+<p>In the command window you see messages like this
+<span class="logs">#### Account ID Bob STATUS set to Normal./span></p>
+</li>
+
+<li>
+<p>Once you perform enough operations, creating multiple accounts, debiting, etc. The Live View Web page should now show charts change to reflect all the changes, like below.</p>
+<image src="readmeimages/3.png"/>
+</li>
+
+<li>
+<p> To reset the data, restart the engine running the cache agent at the command line.</p>
+</li>
+
+<li>
+<p> To stop the live view servers,</p>
+<p>For SB 7.x, Ctrl+c to shutdown the running Live View Server</p>
+<p>For SB 10.x, first stop the node and them remove it,<p>
+<pre class="commands">
+epadmin servicename=fdlv-dep stop node
+epadmin servicename=fdlv-dep remove node
+</pre>
+</li>
+
+</ol>
+
+
+
+<div class="footer">
+<p>TIBCO BusinessEvents&reg; %TIBCO_BE_SHORT_VERSION%<br />
+Copyright&copy; 2004-2023. Cloud Software Group, Inc. All rights reserved.</p>
+</div>
+</body>
+</html>

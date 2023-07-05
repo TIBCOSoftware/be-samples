@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="AccountOperationTrail" description="" GUID="14FB21C4-7C37-D715-5C61-7AF0C081045F" ownerProjectName="FraudDetectionLiveView" superEventPath="" ttl="-1" ttlUnits="Seconds">
+          
+    
+    <properties name="AccountId" ownerProjectName="FraudDetectionLiveView" conceptTypePath="/Events/AccountOperationTrail" ownerPath="/Events/AccountOperationTrail"/>
+          
+    
+    <properties name="OpDate" ownerProjectName="FraudDetectionLiveView" conceptTypePath="/Events/AccountOperationTrail" ownerPath="/Events/AccountOperationTrail"/>
+          
+    
+    <properties name="OpType" ownerProjectName="FraudDetectionLiveView" conceptTypePath="/Events/AccountOperationTrail" ownerPath="/Events/AccountOperationTrail"/>
+          
+    
+    <expiryAction folder="/Events/AccountOperationTrail" name="AccountAudit_expiryAction" ownerProjectName="FraudDetectionLiveView" actionText="" conditionText="">
+                    
+        
+        <symbols>
+                              
+            
+            <symbolList idName="accountaudit" type="/Events/AccountOperationTrail"/>
+                            
+        
+        </symbols>
+                  
+    
+    </expiryAction>
+        
+
+</event:SimpleEvent>

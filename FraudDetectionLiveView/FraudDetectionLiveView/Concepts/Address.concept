@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="Address" GUID="BBA0FA0F-0C3A-DCC8-443C-E23A35A18E0D" ownerProjectName="FraudDetectionLiveView" superConceptPath="" autoStartStateMachine="true">
+      
+    <extendedProperties/>
+      
+    <properties name="City" ownerProjectName="FraudDetectionLiveView" ownerPath="/Concepts/Address" historyPolicy="1"/>
+      
+    <properties name="State" ownerProjectName="FraudDetectionLiveView" ownerPath="/Concepts/Address"/>
+    
+</element:Concept>

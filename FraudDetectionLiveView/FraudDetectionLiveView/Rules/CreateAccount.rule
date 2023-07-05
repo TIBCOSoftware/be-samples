@@ -1,0 +1,56 @@
+/**
+ * @description 
+ * @author 
+ */
+rule Rules.CreateAccount {
+	
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	
+	declare {
+		Events.CreateAccount request;
+	}
+	
+	when {
+	}
+	
+	then {
+		String addressExtId = request.City + "_" + request.State;
+		Concepts.Address address = Cluster.DataGrid.CacheLoadConceptByExtIdByUri(addressExtId, false, "/Concepts/Address");
+		
+		if (address == null) {
+			// Create Address
+			address = Concepts.Address.Address(
+				request.City + "_" + request.State,
+				request.City,
+				request.State
+				);
+		}
+		
+		// Create Account
+		Concepts.Account.Account(
+		    request.AccountId         /*extId String */,
+		    request.Balance           /*Balance double */,
+		    0                         /*Debits double */,
+		    "Normal"                  /*Status String */,
+		    request.AvgMonthlyBalance /*AvgMonthlyBalance double */,
+		    DateTime.now()            /*Creation date datetime*/,
+		    DateTime.now()            /* Modified date datetime*/,
+		    address,
+		    0,
+		    "",
+		    null,
+		    0);
+		
+		System.debugOut("#### Created account " + request.AccountId);
+		
+		Event.consumeEvent(request);	
+		
+		DateTime today = DateTime.now();
+		Event.assertEvent(Event.createEvent("xslt://{{/Events/AccountOperationTrail}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"request\"/><xsl:param name=\"today\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$request/AccountId\"><AccountId><xsl:value-of select=\"$request/AccountId\"/></AccountId></xsl:if><OpDate><xsl:value-of select=\"$today\"/></OpDate><OpType><xsl:value-of select=\"&quot;NEW_ACCOUNT&quot;\"/></OpType></event></createEvent></xsl:template></xsl:stylesheet>"));
+		
+	}
+	
+}

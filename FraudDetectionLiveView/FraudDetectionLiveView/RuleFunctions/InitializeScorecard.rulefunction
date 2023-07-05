@@ -1,0 +1,24 @@
+/**
+ * @description Sets values in the FraudCriteria scorecard
+ */
+void rulefunction RuleFunctions.InitializeScorecard {
+
+	attribute {
+		validity = ACTION;
+	}
+
+	scope {		
+	}
+	
+	body {
+		// Initializes the scorecard variables.
+		FraudCriteria.interval = 120*1000; // 120 seconds
+		FraudCriteria.numTransactions = 3;        // 3 transactions max
+		FraudCriteria.fraudAttempts = 3;
+      	System.debugOut("#### Criteria:");
+      	System.debugOut("     interval        = " + FraudCriteria.interval);		
+      	System.debugOut("     numTransactions = " + FraudCriteria.numTransactions);	
+      	System.debugOut("     fraudAttempts = " + FraudCriteria.fraudAttempts);		
+	}
+	
+}

@@ -1,0 +1,14 @@
+/**
+ * @description Filter addresses where State == "FL"
+ */
+boolean rulefunction RuleFunctions.FilterAddress {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Address address;
+	}
+	body {
+		return address.State == "FL";
+	}
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Scorecard xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/" folder="/" name="FraudCriteria" description="Stores the criteria used to determine fraud" GUID="277BAFC8-7266-8E01-7AF9-304423E1031A" ownerProjectName="FraudDetectionLiveView" scorecard="true">
+      
+    <extendedProperties/>
+      
+    <properties name="interval" ownerProjectName="FraudDetectionLiveView" type="long" ownerPath="/FraudCriteria"/>
+      
+    <properties name="numTransactions" ownerProjectName="FraudDetectionLiveView" type="int" ownerPath="/FraudCriteria"/>
+      
+    <properties name="fraudAttempts" ownerProjectName="FraudDetectionLiveView" type="int" ownerPath="/FraudCriteria"/>
+    
+</element:Scorecard>

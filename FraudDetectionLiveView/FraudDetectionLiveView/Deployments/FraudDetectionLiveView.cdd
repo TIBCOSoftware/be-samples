@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cluster xmlns="http://tibco.com/businessevents/configuration/%TIBCO_BE_SHORT_VERSION%">
+    <revision>
+        <version>96</version>
+        <author>TIBCO Software Inc.</author>
+        <date>2021/04/12 11:47:47</date>
+        <comment/>
+    </revision>
+    <name>FraudDetectionLiveView</name>
+    <message-encoding>UTF-8</message-encoding>
+    <provider>
+        <type>AS2x</type>
+        <class/>
+    </provider>
+    <object-management>
+        <cache-manager>
+            <type>AS2x</type>
+            <class/>
+            <properties>
+                <property name="cache-agent-quorum" value="0"/>
+                <property name="backup-copies" value="1"/>
+                <property name="entity-cache-size" value="10000"/>
+                <property name="object-table-cache-size" value="100000"/>
+                <property name="discovery-url" value=""/>
+                <property name="listen-url" value=""/>
+                <property name="remote-listen-url" value=""/>
+                <property name="protocol-timeout" value="-1"/>
+                <property name="read-timeout" value="60000"/>
+                <property name="write-timeout" value="60000"/>
+                <property name="lock-timeout" value="-1"/>
+                <property name="shutdown-wait" value="8500"/>
+                <property name="workerthreads-count" value="4"/>
+                <property name="explicit-tuple" value="true"/>
+                <property name="server.url" value="localhost"/>
+                <property name="server.port" value="9042"/>
+            </properties>
+            <security enabled="false">
+                <property name="policy-file" value=""/>
+                <property name="policy-identity-password" value=""/>
+                <property name="token-file" value=""/>
+                <property name="token-identity-password" value=""/>
+                <property name="certificate-key-file" value=""/>
+                <property name="domain-name" value=""/>
+                <property name="user-name" value=""/>
+                <property name="user-password" value=""/>
+                <property name="userName" value=""/>
+                <property name="password" value=""/>
+                <property name="useSsl" value="false"/>
+                <property name="trustStore.location" value=""/>
+                <property name="trustStore.pwd" value=""/>
+                <property name="requiresClientAuthentication" value="false"/>
+                <property name="idFileLocation" value=""/>
+            </security>
+            <domain-objects>
+                <default-mode>cache</default-mode>
+                <check-for-version>true</check-for-version>
+                <evict-on-update>false</evict-on-update>
+                <cache-limited>false</cache-limited>
+                <subscribe>true</subscribe>
+                <pre-load-enabled>true</pre-load-enabled>
+                <pre-load-fetch-size>0</pre-load-fetch-size>
+                <pre-load-handles>true</pre-load-handles>
+                <concept-ttl>-1</concept-ttl>
+                <constant>false</constant>
+                <enable-tracking>true</enable-tracking>
+                <domain-object>
+                    <cache-limited>true</cache-limited>
+                    <mode>memory</mode>
+                    <uri>/FraudCriteria</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>interval</name>
+                            </property>
+                            <property>
+                                <name>numTransactions</name>
+                            </property>
+                            <property>
+                                <name>fraudAttempts</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <cache-limited>true</cache-limited>
+                    <mode>cache</mode>
+                    <uri>/Events/AccountOperations</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>AccountId</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <cache-limited>true</cache-limited>
+                    <mode>cache</mode>
+                    <uri>/Events/Debit</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>Amount</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <cache-limited>true</cache-limited>
+                    <mode>cache</mode>
+                    <uri>/Events/Unsuspend</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties/>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <mode>cache</mode>
+                    <uri>/Concepts/Address</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>City</name>
+                            </property>
+                            <property>
+                                <name>State</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <mode>cache</mode>
+                    <uri>/Events/CreateAccount</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>AvgMonthlyBalance</name>
+                            </property>
+                            <property>
+                                <name>Balance</name>
+                            </property>
+                            <property>
+                                <name>City</name>
+                            </property>
+                            <property>
+                                <name>State</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <mode>cache</mode>
+                    <uri>/Concepts/Account</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>Balance</name>
+                            </property>
+                            <property>
+                                <name>Debits</name>
+                            </property>
+                            <property>
+                                <name>Status</name>
+                            </property>
+                            <property>
+                                <name>AvgMonthlyBalance</name>
+                            </property>
+                            <property>
+                                <name>Created</name>
+                            </property>
+                            <property>
+                                <name>Updated</name>
+                            </property>
+                            <property>
+                                <name>Address</name>
+                            </property>
+                            <property>
+                                <name>FraudAttempt</name>
+                            </property>
+                            <property>
+                                <name>Reason</name>
+                            </property>
+                            <property>
+                                <name>DebitUpdate</name>
+                            </property>
+                            <property>
+                                <name>DebitCount</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <mode>cache</mode>
+                    <uri>/Events/AccountOperationTrail</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>AccountId</name>
+                            </property>
+                            <property>
+                                <name>OpDate</name>
+                            </property>
+                            <property>
+                                <name>OpType</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <mode>cache</mode>
+                    <uri>/Concepts/DebitMetric</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>DebitDate</name>
+                            </property>
+                            <property>
+                                <name>Amount</name>
+                            </property>
+                            <property>
+                                <name>AccountId</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+                <domain-object>
+                    <mode>cache</mode>
+                    <uri>/Concepts/FraudMetric</uri>
+                    <backing-store>
+                        <enabled>false</enabled>
+                        <table-name/>
+                        <properties>
+                            <property>
+                                <name>FraudDate</name>
+                            </property>
+                            <property>
+                                <name>AccountId</name>
+                            </property>
+                        </properties>
+                    </backing-store>
+                    <keys>
+                        <key/>
+                    </keys>
+                    <indexes>
+                        <index/>
+                    </indexes>
+                    <encryption/>
+                    <composite-indexes/>
+                </domain-object>
+            </domain-objects>
+            <backing-store>
+                <persistence-option>None</persistence-option>
+                <type>Oracle</type>
+                <properties>
+                    <property name="strategy" value="jdbc"/>
+                    <property name="persistence-policy" value="ASYNC"/>
+                    <property name="cache-aside" value="true"/>
+                    <property name="enforce-pools" value="true"/>
+                    <property name="data-store-path" value=""/>
+                </properties>
+                <primary-connection>
+                    <uri>%%DbUri1%%</uri>
+                    <initial-size>4</initial-size>
+                    <max-size>8</max-size>
+                    <min-size>1</min-size>
+                </primary-connection>
+            </backing-store>
+        </cache-manager>
+        <db-concepts>
+            <db-uris/>
+            <check-interval>60</check-interval>
+            <inactivity-timeout>0</inactivity-timeout>
+            <initial-size>5</initial-size>
+            <max-size>5</max-size>
+            <min-size>5</min-size>
+            <property-check-interval>900</property-check-interval>
+            <retry-count>-1</retry-count>
+            <wait-timeout>1</wait-timeout>
+        </db-concepts>
+    </object-management>
+    <app-metrics-config>
+        <publisher>
+            <publisher-queue-size>100</publisher-queue-size>
+            <publisher-thread-count>2</publisher-thread-count>
+            <publisher-max-retries>3</publisher-max-retries>
+            <publisher-retry-wait-time>1000</publisher-retry-wait-time>
+        </publisher>
+        <store-provider>
+            <type>LDM</type>
+            <properties>
+                <property name="ldm-url" value="lv://localhost"/>
+                <property name="user-name" value=""/>
+                <property name="user-password" value=""/>
+                <property name="initial-size" value="2"/>
+                <property name="max-size" value="2"/>
+            </properties>
+        </store-provider>
+        <entity-set>
+            <entity id="entity-filter-config_1">
+                <uri>/Concepts/Account</uri>
+                <filter/>
+                <properties>
+                    <property name="TrimmingTimestampField" value=""/>
+                    <property name="TrimmingRule" value=""/>
+                    <property name="trimming-rule" value=""/>
+                    <property name="trimming-field" value=""/>
+                    <property name="enable-table-trimming" value=""/>
+                </properties>
+            </entity>
+            <entity id="entity-filter-config_2">
+                <uri>/Concepts/Address</uri>
+                <filter>/RuleFunctions/FilterAddress</filter>
+                <properties>
+                    <property name="TrimmingTimestampField" value=""/>
+                    <property name="TrimmingRule" value=""/>
+                    <property name="trimming-rule" value=""/>
+                    <property name="trimming-field" value=""/>
+                    <property name="enable-table-trimming" value=""/>
+                </properties>
+            </entity>
+            <entity id="entity-filter-config_3">
+                <uri>/Concepts/FraudMetric</uri>
+                <filter/>
+                <properties>
+                    <property name="TrimmingTimestampField" value=""/>
+                    <property name="TrimmingRule" value=""/>
+                    <property name="trimming-rule" value=""/>
+                    <property name="trimming-field" value=""/>
+                    <property name="enable-table-trimming" value=""/>
+                </properties>
+            </entity>
+            <entity id="entity-filter-config_4">
+                <uri>/Concepts/DebitMetric</uri>
+                <filter/>
+                <properties>
+                    <property name="TrimmingTimestampField" value=""/>
+                    <property name="TrimmingRule" value=""/>
+                    <property name="trimming-rule" value=""/>
+                    <property name="trimming-field" value=""/>
+                    <property name="enable-table-trimming" value=""/>
+                </properties>
+            </entity>
+            <entity id="entity-filter-config_5">
+                <uri>/Events/AccountOperationTrail</uri>
+                <filter/>
+                <properties>
+                    <property name="TrimmingTimestampField" value=""/>
+                    <property name="TrimmingRule" value=""/>
+                    <property name="trimming-rule" value=""/>
+                    <property name="trimming-field" value=""/>
+                    <property name="enable-table-trimming" value=""/>
+                </properties>
+            </entity>
+        </entity-set>
+        <property-group/>
+    </app-metrics-config>
+    <rulesets>
+        <rules id="all-rules">
+            <uri>/</uri>
+        </rules>
+    </rulesets>
+    <function-groups>
+        <functions id="all-functions">
+            <uri>/</uri>
+        </functions>
+    </function-groups>
+    <destination-groups>
+        <destinations id="Http">
+            <destination id="AllOperations">
+                <pre-processor>/RuleFunctions/PreProcessor</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>caller</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/HTTP/AllOps</uri>
+            </destination>
+        </destinations>
+    </destination-groups>
+    <process-groups/>
+    <log-configs>
+        <log-config id="logConfig">
+            <enabled>true</enabled>
+            <roles>*:info</roles>
+            <files>
+                <enabled>true</enabled>
+                <dir>logs</dir>
+                <name/>
+                <max-number>10</max-number>
+                <max-size>5000000</max-size>
+                <append>true</append>
+            </files>
+            <terminal>
+                <enabled/>
+                <sys-out-redirect/>
+                <sys-err-redirect/>
+                <encoding/>
+            </terminal>
+            <line-layout>
+                <enabled>false</enabled>
+                <class/>
+                <arg/>
+            </line-layout>
+        </log-config>
+    </log-configs>
+    <agent-classes>
+        <inference-agent-class id="inference-class">
+            <rules>
+                <ref>all-rules</ref>
+            </rules>
+            <destinations>
+                <ref>Http</ref>
+            </destinations>
+            <startup>
+                <uri>/RuleFunctions/InitializeScorecard</uri>
+            </startup>
+            <shutdown/>
+            <local-cache>
+                <eviction>
+                    <max-size/>
+                    <max-time/>
+                </eviction>
+            </local-cache>
+            <shared-queue>
+                <size>1024</size>
+                <workers>10</workers>
+            </shared-queue>
+            <load>
+                <max-active/>
+            </load>
+            <concurrent-rtc>false</concurrent-rtc>
+            <check-for-duplicates>false</check-for-duplicates>
+            <businessworks>
+                <uri/>
+            </businessworks>
+            <property-group/>
+        </inference-agent-class>
+    </agent-classes>
+    <processing-units>
+        <processing-unit id="default">
+            <agents>
+                <agent>
+                    <ref>inference-class</ref>
+                    <key/>
+                    <priority/>
+                </agent>
+            </agents>
+            <logs>logConfig</logs>
+            <hot-deploy>false</hot-deploy>
+            <cache-storage-enabled>true</cache-storage-enabled>
+            <db-concepts>false</db-concepts>
+            <property-group/>
+        </processing-unit>
+    </processing-units>
+    <load-balancer-configs>
+        <pair-configs/>
+        <adhoc-configs/>
+    </load-balancer-configs>
+    <property-group>
+        <property-group comment="" name="auth">
+            <property name="be.mm.auth.type" value="file"/>
+            <property name="be.mm.auth.file.location" value="%TIBCO_BE_HOME_ESC%/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="%TIBCO_BE_HOME_ESC%/mm/config/jaas-config.config"/>
+        </property-group>
+    </property-group>
+</cluster>

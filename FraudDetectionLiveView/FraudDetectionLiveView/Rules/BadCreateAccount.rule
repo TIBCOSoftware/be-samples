@@ -1,0 +1,31 @@
+/**
+ * @description Applies upon request to create an account that already exists.
+ * @author jpascoe-lt2
+ */
+rule Rules.BadCreateAccount {
+	
+	attribute {
+		priority = 1;
+		forwardChain = true;
+	}
+	
+	declare {
+		Concepts.Account existingAccount;
+		Events.CreateAccount request;
+	}
+	
+	when {
+		//Checks whether the extId of an Account instance in the Rete network
+		//matches the incoming event's account ID.
+		existingAccount@extId == request.AccountId;		
+	}
+	
+	then {
+		System.debugOut("#### Account already exists: " + request.AccountId);
+		Event.consumeEvent(request);
+		
+		DateTime today = DateTime.now();
+		Event.assertEvent(Event.createEvent("xslt://{{/Events/AccountOperationTrail}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"request\"/><xsl:param name=\"today\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$request/AccountId\"><AccountId><xsl:value-of select=\"$request/AccountId\"/></AccountId></xsl:if><OpDate><xsl:value-of select=\"$today\"/></OpDate><OpType><xsl:value-of select=\"&quot;DUPLICATE_ACCOUNT&quot;\"/></OpType></event></createEvent></xsl:template></xsl:stylesheet>"));
+	}
+	
+}

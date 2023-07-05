@@ -1,0 +1,34 @@
+/**
+ * @description 
+ * @author 
+ */
+rule Rules.CheckNegativeBalance {
+	
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	
+	declare {
+		Concepts.Account account;		
+	}
+	
+	when {
+		// Checks that the balance is less than zero
+		account.Balance < 0;
+		// Checks that Account status is not set to Suspended
+		account.Status != "Suspended";
+	}
+	
+	then {
+		DateTime now = DateTime.now();
+		
+		account.Status = "Suspended";
+		account.Reason = "Negative Balance";
+		account.Updated = now;
+		System.debugOut("#### Account ID " + account@extId + " STATUS set to Suspended. Balance " + account.Balance + " is less than zero");
+		
+		Event.assertEvent(Event.createEvent("xslt://{{/Events/AccountOperationTrail}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"account\"/><xsl:param name=\"now\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$account/@extId\"><AccountId><xsl:value-of select=\"$account/@extId\"/></AccountId></xsl:if><OpDate><xsl:value-of select=\"$now\"/></OpDate><OpType><xsl:value-of select=\"&quot;NEGATIVE_BALANCE&quot;\"/></OpType></event></createEvent></xsl:template></xsl:stylesheet>"));
+	}
+	
+}

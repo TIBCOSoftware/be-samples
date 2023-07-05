@@ -1,0 +1,50 @@
+/**
+ * @description Debits the matching account by the specified amount
+ * @author 
+ */
+rule Rules.ApplyDebit {
+	attribute {
+		priority = 1;
+		forwardChain = true;
+	}
+	declare {
+		Events.Debit	debit;
+		Concepts.Account	account;
+	}
+	when {
+		//Checks whether the extId of an Account instance in working memory  
+		//matches the incoming event's account ID
+		account@extId == debit.AccountId;
+	}
+	then {
+		//If Account Status is not Suspended, debits the account
+		if (account.Status !="Suspended") {
+	       	account.Debits++;
+	       	System.debugOut("#### Debiting account " + account@extId + " by $" + debit.Amount);
+	       	account.Balance = account.Balance - debit.Amount;
+	       	System.debugOut("#### New balance: $" + account.Balance);
+	       	account.Updated = DateTime.now();
+	       	
+	       	if (account.DebitUpdate == null || (DateTime.getTimeInMillis(DateTime.now()) - DateTime.getTimeInMillis(account.DebitUpdate) > FraudCriteria.interval)) {
+	       		account.DebitUpdate = DateTime.now();
+	       		account.DebitCount = 1;
+	       	} else {
+	       		account.DebitCount++;
+	       	}
+	       	
+	       	// create Debit Metric
+	       	DateTime now = DateTime.now();
+			//bucket debits by minute
+			DateTime nowByMin = DateTime.createTime(DateTime.getYear(now),DateTime.getMonth(now),DateTime.getDate(now),DateTime.getHour(now),DateTime.getMinute(now),0,null);
+			Instance.createInstance("xslt://{{/Concepts/DebitMetric}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"debit\"/><xsl:param name=\"nowByMin\"/><xsl:template name=\"Function\" match=\"/\"><createObject><object><DebitDate><xsl:value-of select=\"$nowByMin\"/></DebitDate><xsl:if test=\"$debit/Amount\"><Amount><xsl:value-of select=\"$debit/Amount\"/></Amount></xsl:if><xsl:if test=\"$debit/AccountId\"><AccountId><xsl:value-of select=\"$debit/AccountId\"/></AccountId></xsl:if></object></createObject></xsl:template></xsl:stylesheet>");	       	
+	       	
+	       	Event.assertEvent(Event.createEvent("xslt://{{/Events/AccountOperationTrail}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"account\"/><xsl:param name=\"now\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$account/@extId\"><AccountId><xsl:value-of select=\"$account/@extId\"/></AccountId></xsl:if><OpDate><xsl:value-of select=\"$now\"/></OpDate><OpType><xsl:value-of select=\"&quot;DEBIT&quot;\"/></OpType></event></createEvent></xsl:template></xsl:stylesheet>"));
+	    }
+		else {
+	       	System.debugOut("#### Cannot debit from a suspended account " + account@extId);
+		}
+		
+		Event.consumeEvent(debit);
+	}
+
+}

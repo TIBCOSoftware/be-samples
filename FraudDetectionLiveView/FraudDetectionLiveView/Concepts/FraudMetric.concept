@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="FraudMetric" description="" GUID="2DB55D46-232E-1788-78DE-1505246C001D" ownerProjectName="FraudDetectionLiveView" superConceptPath="" autoStartStateMachine="true">
+      
+    <extendedProperties/>
+      
+    <properties name="FraudDate" ownerProjectName="FraudDetectionLiveView" type="DateTime" ownerPath="/Concepts/FraudMetric"/>
+      
+    <properties name="AccountId" ownerProjectName="FraudDetectionLiveView" ownerPath="/Concepts/FraudMetric"/>
+    
+</element:Concept>
