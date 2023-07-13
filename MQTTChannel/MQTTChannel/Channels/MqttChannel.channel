@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="MqttChannel" description="" GUID="AE9C3E81-12C8-0443-47DB-2F950070AAB1" ownerProjectName="MQTTChannel">
-  <driver configMethod="REFERENCE" reference="/SharedResources/mqttconn.sharedmqttcon" label="MQTT" channel="/">
+  <driver reference="/SharedResources/mqttconn.sharedmqttcon" label="MQTT" channel="/">
     <properties>
       <properties xsi:type="designtime:SimpleProperty" name="mqtt.broker.urls" value="%%mqtt.channel/brokerUrl%%" mandatory="true"/>
       <properties xsi:type="designtime:SimpleProperty" name="UserName" value=""/>
