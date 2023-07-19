@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration:StudioProjectConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http:///com/tibco/cep/studio/common/configuration/model/project_configuration.ecore" name="LiveScore" version="%BE_VERSION_ESC%" build="101" xpathVersion="2.0">
+  <javaSourceFolderEntries entryType="JAVA_SOURCE_FOLDER" path="/LiveScore/JavaSrc" readOnly="true"/>
+  <enterpriseArchiveConfiguration name="LiveScore" author="TIBCO Software Inc." version="18" path="%TIBCO_BE_HOME_ESC%/examples/standard/Analytics/LiveScore/LiveScore.ear" overwrite="true"/>
+</configuration:StudioProjectConfiguration>
