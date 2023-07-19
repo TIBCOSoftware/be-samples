@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rms:ArtifactsSummary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rms="http:///com/tibco/cep/rms/artifacts/artifacts_summary.ecore" name="pattern_server">
+  <addedArtifacts>
+    <artifact artifactPath="/Channels/HTTPChannel" artifactType="channel" containerPath="/Channels"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/BaseDataRequestEvent" artifactType="event" containerPath="/Events"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/BaseDataResponseEvent" artifactType="event" containerPath="/Events"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/CallSim/CallDropped" artifactType="event" containerPath="/Events/CallSim"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/CallSim/CallEnded" artifactType="event" containerPath="/Events/CallSim"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/CallSim/CallPlaced" artifactType="event" containerPath="/Events/CallSim"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/ControlRequestEvent" artifactType="event" containerPath="/Events"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/ControlResponseEvent" artifactType="event" containerPath="/Events"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/ParkSim/ParkClosed" artifactType="event" containerPath="/Events/ParkSim"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/ParkSim/ParkItemEntered" artifactType="event" containerPath="/Events/ParkSim"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/ParkSim/ParkItemLeft" artifactType="event" containerPath="/Events/ParkSim"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/RemoteMsgRequestEvent" artifactType="event" containerPath="/Events"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Events/RemoteMsgResponseEvent" artifactType="event" containerPath="/Events"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/Controller" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/CreateControlResponse" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/CreateDataResponse" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/HTTPSender" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/PatternResultFailureHandler" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/PatternResultHandler" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/PatternResultSuccessHandler" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/RemoteMessageCallbackHandler" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/RemoteMessageSender" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/Shutdown" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/Startup" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/ToErrorXML" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/RuleFunctions/ToSuccessXML" artifactType="rulefunction" containerPath="/RuleFunctions"/>
+  </addedArtifacts>
+  <addedArtifacts>
+    <artifact artifactPath="/Rules/NewEventsInterceptor" artifactType="rule" containerPath="/Rules"/>
+  </addedArtifacts>
+</rms:ArtifactsSummary>
