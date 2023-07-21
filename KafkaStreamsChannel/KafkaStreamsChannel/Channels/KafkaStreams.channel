@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="KafkaStreams" description="" GUID="FDAC969A-CB67-983E-358D-084E7AD18949" ownerProjectName="KafkaStreamsChannel">
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" folder="/Channels/" name="KafkaStreams" description="" GUID="FDAC969A-CB67-983E-358D-084E7AD18949" ownerProjectName="KafkaStreamsChannel">
   <driver label="KAFKA STREAMS" channel="/">
     <properties>
       <properties xsi:type="designtime:SimpleProperty" name="kafka.broker.urls" value="%%kafka/broker.url%%" mandatory="true"/>
@@ -9,7 +9,7 @@
       <properties xsi:type="designtime:SimpleProperty" name="kafka.keystore.identity" value=""/>
       <properties xsi:type="designtime:SimpleProperty" name="kafka.truststore.password" value=""/>
     </properties>
-    <destinations name="OrderStream" description="" GUID="787E1DC4-9091-EEBE-9126-942C1C0C893A" ownerProjectName="KafkaStreamsChannel" eventURI="/Events/ItemDemand" serializerDeserializerClass="com.tibco.cep.driver.kafka.serializer.KafkaJsonSerializer" driverConfig="//@driver">
+    <destinations name="OrderStream" description="" GUID="787E1DC4-9091-EEBE-9126-942C1C0C893A" ownerProjectName="KafkaStreamsChannel" eventURI="/Events/ItemDemand" serializerDeserializerClass="com.tibco.cep.driver.kafkastreams.serializer.KafkaJsonSerializer" driverConfig="//@driver">
       <properties>
         <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="NEVER" mandatory="true"/>
         <properties xsi:type="designtime:SimpleProperty" name="topic.name" value="%%kafka.destination/order.topic%%" mandatory="true"/>
