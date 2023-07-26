@@ -45,14 +45,14 @@ BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u client -c MQTTChan
 <li><p>Open another command window and run TemperaturePublisher.</p>
 <pre class="commands">
 cd BE_HOME/examples/standard/MQTTChannel 
-javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
-java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher firstfloor
+javac -cp BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar com.tibco.mqtt.samples.TemperaturePublisher firstfloor
 </pre>	
 <p>Note : The default broker url used here is tcp://localhost:1883. If some other broker url needs to be used, it can be given as second command line arg.</p>
 <pre class="commands">
 cd BE_HOME/examples/standard/MQTTChannel 
-javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
-java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher firstfloor brokerUrl
+javac -cp BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar com.tibco.mqtt.samples.TemperaturePublisher firstfloor brokerUrl
 </pre>
 </li>
 
@@ -102,14 +102,14 @@ BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u server -c MQTTChan
 <li><p>Open another command window and run TemperaturePublisher.</p>
 <pre class="commands">
 cd BE_HOME/examples/standard/MQTTChannel 
-javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
-java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher secondfloor
+javac -cp BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar com.tibco.mqtt.samples.TemperaturePublisher secondfloor
 </pre>	
 <p>Note : The default broker url used here is tcp://localhost:1883. If some other broker url needs to be used, it can be given as second command line arg.</p>
 <pre class="commands">
 cd BE_HOME/examples/standard/MQTTChannel 
-javac -cp BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar -d . TemperaturePublisher.java
-java -cp .:BE_HOME/lib/ext/tpcl/org.eclipse.paho.client.mqttv3-1.2.5.jar com.tibco.mqtt.samples.TemperaturePublisher secondfloor brokerUrl
+javac -cp BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar -d . TemperaturePublisher.java
+java -cp .:BE_HOME/lib/ext/tpcl/contrib/mqtt-1.0.0.jar com.tibco.mqtt.samples.TemperaturePublisher secondfloor brokerUrl
 </pre>
 
 	
