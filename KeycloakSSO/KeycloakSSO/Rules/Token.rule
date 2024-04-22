@@ -1,0 +1,24 @@
+/**
+ * @description 
+ * @author yogita-ThinkPad-T14-Gen-2i
+ */
+rule Rules.Token {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.Timer request;
+	}
+	when {
+		
+	}
+	then {
+		String output = Authentication.ssoAuthenticate("https://www.keycloak.org/app/#url=http://localhost:8080&realm=myrealm&client=myclient","myuser","YWRtaW4=");
+		if(output == null)
+			System.debugOut("Authentication Failed");
+		else
+			System.debugOut("Authentication succeeded");
+		    System.debugOut("Keycloak Token:"+output);	
+	}
+}
