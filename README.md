@@ -27,4 +27,5 @@ Below is the prerequites that is applicable to all the samples,
   ```
   - Finally open the sample specific readme.html in the browser and follow the steps.
    
-  
+  ## License
+  This project is licensed under the BSD 3-Clause License. The full license text is available here.
