@@ -1,0 +1,89 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title> Keycloak SSO
+
+        - TIBCO BusinessEvents&reg; Examples
+    </title>
+    <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <link rel="Shortcut Icon" href="../../_resources/icon.gif" type="image/gif" />
+    <style type="text/css" media="all">
+        @import "../../_resources/examples.css";
+    </style>
+</head>
+
+<body onLoad="buildForms()">
+
+
+    <h2>Purpose of This Example</h2>
+
+    <p>The KeycloakSSO example demonstrates how TIBCO BusinessEvents&reg; uses the ssoAuthenticate function to retrieve
+        Keycloak token. </p>
+
+    <h2>About the project</h2>
+
+    <p>The project has a single agent class - inference</p>
+
+    <p>The inference agent has Token rule which triggers when a Timer event is generated.The rule retrives the token using
+        ssoAuthenticate function and logs the Authentication</p>
+
+    <h3>Running the project</h3>
+
+    <ol>
+
+        <li>
+            <p>Make sure to run Keycloak with Docker following the URL
+                https://www.keycloak.org/getting-started/getting-started-docker.</p>
+        </li>
+
+        <li>
+            <p> Add the below configuration to BE_HOME\mm\config\jaas-config.config file.</p>
+            <code> SSOAuthenticator {
+                com.tibco.cep.security.authen.sso.SSOLoginModule required debug=true;
+            };</code>
+        </li>
+
+        <li>
+            <p>Update the BE_HOME\mm\config\users.pwd with the user and password(MD5 Hash) created in step 1 as an MM_Administrator.For Example- myuser:21232f297a57a5a743894a0e4a801fc3:MM_ADMINISTRATOR; Now add the
+                property name="be.auth.file.location" and value="BE_HOME\mm\config\users.pwd" in "auth" property-group in the cdd.</p>
+        </li>
+
+        <li>
+            <p>Open a command window. Start a inference agent instance.</p>
+            <pre class="commands">
+
+BE_HOME/bin/be-engine --propFile BE_HOME\bin\be-engine.tra -u default -c Deployments/sso.cdd Deployments/KeyclockSSO.ear
+</pre>
+        </li>
+
+    </ol>
+
+    <h3>Output</h3>
+
+    <p>Once the engine is up and running the agent starts retrieving tokens periodically.</p>
+
+    <h4>Sample output</h4>
+    <pre class="commands">
+...
+2024 Apr 18 16:37:00:759 GMT +05 yogita-ThinkPad-T14-Gen-2i INFO [inference-class.HiResTimer] - [user] [inference-class] Authentication succeeded
+2024 Apr 18 16:37:00:759 GMT +05 yogita-ThinkPad-T14-Gen-2i INFO [inference-class.HiResTimer] - [user] [inference-class] Keycloak Token:PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFNTT1Rva2VuIElEPSI2ODg2
+ZjFmMS0yZmMzLTRmMzUtODMxOC00YzJlY2Y4NjkwYjYiPjxTdWJqZWN0Pm15dXNlcjwvU3ViamVj
+dD48SXNzdWVyPmh0dHBzOi8vd3d3LmtleWNsb2FrLm9yZy9hcHAvI3VybD1odHRwOi8vbG9jYWxo
+b3N0OjgwODAmYW1wO3JlYWxtPb3N0OjgwODAmYW1wO3JlYWxtPW15cmVhbG0mYW1wO2NsaWVudD1teWNsaWVudDwvSXNzdWVyPjxJ
+W15cmVhbG0mYW1wO2NsaWVudD1teWNsaWVudDwvSXNzdWVyPjxJ
+c3N1ZUluc3RhbnQ+VGh1IEFwciAxOCAxNjozNzowMCBJU1QgMjAyNDwvSXNzdWVJbnN0YW50Pjwv
+U1NPVG9rZW4+
+...
+</pre>
+
+    <div class="footer">
+        <p>TIBCO BusinessEvents&reg; 6.3<br />
+            Copyright&copy; 2004-2024. Cloud Software Group, Inc. All rights reserved.</p>
+    </div>
+</body>
+
+</html>

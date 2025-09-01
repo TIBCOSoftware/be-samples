@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:TimeEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="Timer" description="" GUID="961ADDB6-FE3F-53EA-1E93-412644AF6361" ownerProjectName="KeyclockSSO" type="TimeEvent" superEventPath="" scheduleType="repeat" timeEventCount="1" interval="30" intervalUnit="Seconds"/>
