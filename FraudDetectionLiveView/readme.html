@@ -83,17 +83,6 @@ Fraud Detection is a commonly used scenario for highlighting what's different ab
 <p>Below are the list of pre-requisites before running this example:</p>
 <ul>
 	<li>
-		<p><b>For SB 7.x</b></p>
-		<ul>
-		<li><p>Install TIBCO Live Data Mart</p></li>
-		<li><p>Download Live View Web. Once downloaded, unzip the contents and look for lvweb.war within the root folder. There are 2 options to set Live View Web with StreamBase,</p></li>
-			<ul>
-				<li><p>Global - Create a folder namely lv-user-webapps under <i>STREAMBASE_HOME</i>/liveview/server. This will make Live View Web available to all LV projects run via this StreamBase installation.</p></li>
-				<li><p>Local - Create a folder namely lv-user-webapps under the generated project (<i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/FraudDetectionLiveView. This will make Live View Web available to only this project.</p></li>
-			</ul>
-		</ul>
-	</li>
-	<li>
 		<p><b>For SB 10.x</b></p>
 		<ul>
 			<li><p>Install TIBCO Streambase 10.x.</p></li>
@@ -109,23 +98,6 @@ Fraud Detection is a commonly used scenario for highlighting what's different ab
 <li>
 <ul>
 <p>Start LiveView Server</p>
-<li>
-<p><b>For SB 7.x</b></p>
-<p><b>Linux/Mac:</b></p>
-<p>Open a command window and at the command prompt, run the LDM server with the generated LiveView project. Substitute your actual value for STREAMBASE_HOME</p>
-
-<pre class="commands">
-cd <i>SB_HOME</i>/bin
-lv-server run {generated project's path}
-</pre>
-
-<p>Alternatively you can setup SB environment, which sets up the STREAMBASE_HOME so you can run SB commands from anywhere. Adapt these commands as needed.</p>
-
-<p><b>Windows:</b></p>
-<p>Always run the command line version of StreamBase Server (sbd.exe) from a StreamBase Command Prompt invoked from the Windows Start menu, not from the standard Windows command prompt. The StreamBase Command Prompt has its environment and PATH preconfigured for running StreamBase and LiveView commands and utilities.</p>
-
-<p><b>Note:</b> The generated Liveview Project is already available as part of the examples @ <i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/LiveViewProject/FraudDetectionLiveView. You can use this or generate a new one and pass the project path to the above command while starting the server.</p>
-</li>
 <li>
 <p><b>For SB 10.x</b></p>
 <p><b>Linux/Mac:</b></p>
@@ -152,6 +124,7 @@ epadmin install node nodename=A.fdlv-dep application={path to application.zip fi
 <li>Create StreamBase Application Archive - Right click on StreamBase Application project and select StreamBase > Create StreamBase Application Archive to create application zip.</li>
 <li>Use the application zip created under target directory of StreamBase Application project to install the node.</li>
 </ul>
+<p><b>Note:</b></p><p>From StreamBase 11.1.0 onwards, LiveView metadata is stored with SQLite instead of H2 by default. In such case, use LiveView.sqlite.db instead of LiveView.h2.db file to create application zip.</p>
 </li>
 <li>
 <p>Start the node</p>
@@ -271,7 +244,6 @@ cd <i>BE_HOME</i>/examples/metrics/FraudDetectionLiveView/FraudDetectionLiveView
 
 <li>
 <p> To stop the live view servers,</p>
-<p>For SB 7.x, Ctrl+c to shutdown the running Live View Server</p>
 <p>For SB 10.x, first stop the node and them remove it,<p>
 <pre class="commands">
 epadmin servicename=fdlv-dep stop node
