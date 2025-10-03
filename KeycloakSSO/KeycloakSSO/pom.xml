@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.tibco.cep</groupId>
+    <artifactId>runtime</artifactId>
+    <version>6.3.1</version>
+  </parent>
+  <groupId>com.tibco.be</groupId>
+  <artifactId>KeyclockSSO</artifactId>
+  <packaging>ear</packaging>
+  <description></description>
+  <developers>
+    <developer>
+      <name>yogita</name>
+    </developer>
+  </developers>
+  <properties>
+    <beHome>/home/yogita/testing/be/6.3</beHome>
+    <jdkHome></jdkHome>
+    <projectVersion>6.3.1</projectVersion>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.tibco.be.maven.plugin</groupId>
+        <artifactId>be-maven-plugin</artifactId>
+        <version>${project.parent.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <beProjectDetails>
+            <useLegacyId>false</useLegacyId>
+            <projectVersion>${projectVersion}</projectVersion>
+            <earLocation>/home/yogita/631work/KeyclockSSO/Deployments/KeyclockSSO.ear</earLocation>
+            <includeSource>false</includeSource>
+            <includeServiceLevelGVs>true</includeServiceLevelGVs>
+          </beProjectDetails>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
