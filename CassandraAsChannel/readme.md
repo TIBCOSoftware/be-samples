@@ -14,7 +14,7 @@ About DataStax CDC for Apache Cassandra®:
 DataStax CDC for Apache Cassandra® is open-source software (OSS) that sends Cassandra mutations for tables having Change Data Capture (CDC) enabled to Apache Pulsar™.
 
 ### Pre-requisites
-Apache Cassandra 4.0+  - Only Cassandra 4.0 supports the near real-time CDC allowing to replicate data as soon as they are synced on disk. 
+Apache Cassandra 4.0+  - Only Cassandra 4.0 supports the near real-time CDC allowing to replicate data as soon as they are synced on disk. (CDC for Apache Cassandra does not support/or have a component available for Cassandra 5. Hence, only Cassandra 4.x is supported for Cassandra Channel.)
 Apache Pulsar 2.11.0
 DataStax CDC for Apache Cassandra (v2.2.3) - 
             CDC for Cassandra has two components:
