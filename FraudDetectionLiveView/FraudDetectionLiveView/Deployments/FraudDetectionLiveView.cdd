@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<cluster xmlns="http://tibco.com/businessevents/configuration/%TIBCO_BE_SHORT_VERSION%">
+<cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>96</version>
+        <version>100</version>
         <author>TIBCO Software Inc.</author>
-        <date>2021/04/12 11:47:47</date>
+        <date>2025/09/29 11:37:45</date>
         <comment/>
     </revision>
     <name>FraudDetectionLiveView</name>
     <message-encoding>UTF-8</message-encoding>
     <provider>
-        <type>AS2x</type>
-        <class/>
+        <type>Ignite</type>
+        <class>com.tibco.cep.ignite.cluster.IgniteClusterProvider</class>
+        <properties>
+            <property name="discovery-url" value="127.0.0.1:47500..47510"/>
+            <property name="listen-port" value="47500..47510"/>
+            <property name="communication-port" value="47100..47110"/>
+            <property name="socket-write-timeout" value="30000"/>
+            <property name="connect-timeout" value="30000"/>
+            <property name="join-timeout" value="30000"/>
+            <property name="network-timeout" value="30000"/>
+            <property name="failure-detection-timeout" value="30000"/>
+            <property name="hostaware-enable" value="true"/>
+            <property name="hostaware-hostname" value="localhost"/>
+        </properties>
+        <security enabled="false">
+            <property name="ssl.trusted.certificate.folder.path" value=""/>
+            <property name="ssl.identity.file.path" value=""/>
+            <property name="ssl.trusted.store.password" value=""/>
+        </security>
     </provider>
     <object-management>
         <cache-manager>
-            <type>AS2x</type>
-            <class/>
+            <type>Ignite</type>
+            <class>com.tibco.cep.ignite.store.IgniteStoreProvider</class>
             <properties>
-                <property name="cache-agent-quorum" value="0"/>
+                <property name="cache-agent-quorum" value="1"/>
                 <property name="backup-copies" value="1"/>
-                <property name="entity-cache-size" value="10000"/>
-                <property name="object-table-cache-size" value="100000"/>
-                <property name="discovery-url" value=""/>
-                <property name="listen-url" value=""/>
-                <property name="remote-listen-url" value=""/>
-                <property name="protocol-timeout" value="-1"/>
-                <property name="read-timeout" value="60000"/>
-                <property name="write-timeout" value="60000"/>
-                <property name="lock-timeout" value="-1"/>
-                <property name="shutdown-wait" value="8500"/>
-                <property name="workerthreads-count" value="4"/>
-                <property name="explicit-tuple" value="true"/>
-                <property name="server.url" value="localhost"/>
-                <property name="server.port" value="9042"/>
+                <property name="listen-port" value="47500..47510"/>
+                <property name="communication-port" value="47100..47110"/>
+                <property name="socket-write-timeout" value="30000"/>
+                <property name="connect-timeout" value="30000"/>
+                <property name="join-timeout" value="30000"/>
+                <property name="network-timeout" value="30000"/>
+                <property name="failure-detection-timeout" value="30000"/>
+                <property name="hostaware-enable" value="true"/>
+                <property name="hostaware-hostname" value="localhost"/>
+                <property name="encryption-enable" value="false"/>
+                <property name="encryption.identity.file.path" value=""/>
+                <property name="data-center-id" value="1"/>
+                <property name="is-sender-node" value="false"/>
+                <property name="sender-group-name" value="SenderGroup1"/>
+                <property name="receiver-data-center-id" value="2"/>
+                <property name="local-outbound-address" value="127.0.0.1"/>
+                <property name="receiver-address" value="127.0.0.1:50001"/>
+                <property name="batch-send-frequency" value=""/>
+                <property name="batch-send-size" value=""/>
+                <property name="is-receiver-node" value="false"/>
+                <property name="local-inbound-address" value="127.0.0.1:50001"/>
+                <property name="license-file-location" value=" "/>
             </properties>
             <security enabled="false">
-                <property name="policy-file" value=""/>
-                <property name="policy-identity-password" value=""/>
-                <property name="token-file" value=""/>
-                <property name="token-identity-password" value=""/>
-                <property name="certificate-key-file" value=""/>
-                <property name="domain-name" value=""/>
-                <property name="user-name" value=""/>
-                <property name="user-password" value=""/>
-                <property name="userName" value=""/>
-                <property name="password" value=""/>
-                <property name="useSsl" value="false"/>
-                <property name="trustStore.location" value=""/>
-                <property name="trustStore.pwd" value=""/>
-                <property name="requiresClientAuthentication" value="false"/>
-                <property name="idFileLocation" value=""/>
+                <property name="ssl.trusted.certificate.folder.path" value=""/>
+                <property name="ssl.identity.file.path" value=""/>
+                <property name="ssl.trusted.store.password" value=""/>
             </security>
             <domain-objects>
                 <default-mode>cache</default-mode>
@@ -61,6 +74,8 @@
                 <pre-load-fetch-size>0</pre-load-fetch-size>
                 <pre-load-handles>true</pre-load-handles>
                 <concept-ttl>-1</concept-ttl>
+                <entity-cache-size>50</entity-cache-size>
+                <object-table-cache-size>200</object-table-cache-size>
                 <constant>false</constant>
                 <enable-tracking>true</enable-tracking>
                 <domain-object>
@@ -373,6 +388,8 @@
             <publisher-thread-count>2</publisher-thread-count>
             <publisher-max-retries>3</publisher-max-retries>
             <publisher-retry-wait-time>1000</publisher-retry-wait-time>
+            <enable-system-metrics-monitoring>false</enable-system-metrics-monitoring>
+            <system-metrics-publish-time>10000</system-metrics-publish-time>
         </publisher>
         <store-provider>
             <type>LDM</type>
@@ -395,6 +412,9 @@
                     <property name="trimming-field" value=""/>
                     <property name="enable-table-trimming" value=""/>
                 </properties>
+                <publish-application-metrics>true</publish-application-metrics>
+                <publish-agent-stat>false</publish-agent-stat>
+                <publish-cache-stat>false</publish-cache-stat>
             </entity>
             <entity id="entity-filter-config_2">
                 <uri>/Concepts/Address</uri>
@@ -406,6 +426,9 @@
                     <property name="trimming-field" value=""/>
                     <property name="enable-table-trimming" value=""/>
                 </properties>
+                <publish-application-metrics>true</publish-application-metrics>
+                <publish-agent-stat>false</publish-agent-stat>
+                <publish-cache-stat>false</publish-cache-stat>
             </entity>
             <entity id="entity-filter-config_3">
                 <uri>/Concepts/FraudMetric</uri>
@@ -417,6 +440,9 @@
                     <property name="trimming-field" value=""/>
                     <property name="enable-table-trimming" value=""/>
                 </properties>
+                <publish-application-metrics>true</publish-application-metrics>
+                <publish-agent-stat>false</publish-agent-stat>
+                <publish-cache-stat>false</publish-cache-stat>
             </entity>
             <entity id="entity-filter-config_4">
                 <uri>/Concepts/DebitMetric</uri>
@@ -428,6 +454,9 @@
                     <property name="trimming-field" value=""/>
                     <property name="enable-table-trimming" value=""/>
                 </properties>
+                <publish-application-metrics>true</publish-application-metrics>
+                <publish-agent-stat>false</publish-agent-stat>
+                <publish-cache-stat>false</publish-cache-stat>
             </entity>
             <entity id="entity-filter-config_5">
                 <uri>/Events/AccountOperationTrail</uri>
@@ -439,10 +468,26 @@
                     <property name="trimming-field" value=""/>
                     <property name="enable-table-trimming" value=""/>
                 </properties>
+                <publish-application-metrics>true</publish-application-metrics>
+                <publish-agent-stat>false</publish-agent-stat>
+                <publish-cache-stat>false</publish-cache-stat>
             </entity>
         </entity-set>
         <property-group/>
     </app-metrics-config>
+    <telemetry-config>
+        <service-name>default</service-name>
+        <sampler>always_on</sampler>
+        <traceidratio>1.0</traceidratio>
+        <propagators>tracecontext</propagators>
+        <no-trace-uris/>
+        <trace-uris>
+            <uri>/</uri>
+        </trace-uris>
+        <span-exporter>
+            <type>none</type>
+        </span-exporter>
+    </telemetry-config>
     <rulesets>
         <rules id="all-rules">
             <uri>/</uri>
@@ -547,8 +592,9 @@
     <property-group>
         <property-group comment="" name="auth">
             <property name="be.mm.auth.type" value="file"/>
-            <property name="be.mm.auth.file.location" value="%TIBCO_BE_HOME_ESC%/mm/config/users.pwd"/>
-            <property name="java.security.auth.login.config" value="%TIBCO_BE_HOME_ESC%/mm/config/jaas-config.config"/>
+            <property name="be.mm.auth.file.location" value="C:/Installations/GA/630/176/be/6.3/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="C:/Installations/GA/630/176/be/6.3/mm/config/jaas-config.config"/>
         </property-group>
+        <property name="liveview.internal.client.kerberos.use" value="false"/>
     </property-group>
 </cluster>
